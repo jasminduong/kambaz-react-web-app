@@ -10,7 +10,7 @@ export default function Signin() {
         className="wd-password"
       />{" "}
       <br />
-      <Link to="/Kambaz/Account/Profile" id="wd-signin-btn">
+      <Link to="/Kambaz/Dashboard" id="wd-signin-btn">
         {" "}
         Sign in{" "}
       </Link>{" "}

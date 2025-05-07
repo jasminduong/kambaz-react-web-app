@@ -57,7 +57,16 @@ export default function Lab1() {
           <li>Serve and enjoy!</li>
         </ol>
         My favorite recipe:
-        <ol id="wd-your-favorite-recipe">{/* complete on your own */}</ol>
+        <ol id="wd-your-favorite-recipe">
+          <li>In a bowl, mix flour, sugar, baking powder, and salt.</li>
+          <li>In another bowl, whisk milk, egg, butter, and vanilla.</li>
+          <li>Pour wet ingredients into dry and stir until just combined.</li>
+          <li>Heat a non-stick pan over medium heat and lightly grease it.</li>
+          <li>
+            Pour 1/4 cup of batter for each pancake. Cook until bubbles form,
+            then flip and cook until golden.
+          </li>
+        </ol>
         <h5>Unordered List Tag</h5>
         My favorite books (in no particular order)
         <ul id="wd-my-books">
@@ -68,7 +77,11 @@ export default function Lab1() {
           <li>The Forever War</li>
         </ul>
         Your favorite books (in no particular order)
-        <ul id="wd-your-books">{/* complete on your own */}</ul>
+        <ul id="wd-your-books">
+          <li>And Then There Were None</li>
+          <li>One of Us is Lying</li>
+          <li>One of Us is Next</li>
+        </ul>
       </div>
 
       <div id="wd-tables">
