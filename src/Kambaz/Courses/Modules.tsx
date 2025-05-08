@@ -1,6 +1,6 @@
 export default function Modules() {
   return (
-    <div>
+    <div style={{ textAlign: "left" }}>
       {/* Implement Collapse All button, View Progress button, etc. */}
       <ul id="wd-modules">
         <li className="wd-module">
