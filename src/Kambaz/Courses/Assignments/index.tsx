@@ -17,7 +17,8 @@ export default function Assignments() {
           </a>{" "}
           <div>
             Multiple Modules | <strong>Not available until</strong> May 6 at
-            12:00am | <strong>Due</strong> May 13 at 11:59pm | 100 pts
+            12:00am |<br></br>
+            <strong>Due</strong> May 13 at 11:59pm | 100 pts
           </div>
         </li>
         <li className="wd-assignment-list-item">
@@ -29,7 +30,8 @@ export default function Assignments() {
           </a>{" "}
           <div>
             Multiple Modules | <strong>Not available until</strong> May 13 at
-            12:00am | <strong>Due</strong> May 20 at 11:59pm | 100 pts
+            12:00am |<br></br>
+            <strong>Due</strong> May 20 at 11:59pm | 100 pts
           </div>
         </li>
         <li className="wd-assignment-list-item">
@@ -41,7 +43,8 @@ export default function Assignments() {
           </a>{" "}
           <div>
             Multiple Modules | <strong>Not available until</strong> May 20 at
-            12:00am | <strong>Due</strong> May 27 at 11:59pm | 100 pts
+            12:00am |<br></br>
+            <strong>Due</strong> May 27 at 11:59pm | 100 pts
           </div>
         </li>
       </ul>

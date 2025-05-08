@@ -6,7 +6,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 export default function Account() {
   return (
-    <div id="wd-account-screen">
+    <div id="wd-account-screen" style={{ textAlign: "left" }}>
       <table>
         <tr>
           <td valign="top">

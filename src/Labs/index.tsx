@@ -6,6 +6,7 @@ import Lab3 from "./Lab3";
 export default function Labs() {
   return (
     <div style={{ textAlign: "left" }}>
+      <h4>CS5610 | Jasmin Duong</h4>
       <h1>Labs</h1>
       <TOC />
       <Routes>
