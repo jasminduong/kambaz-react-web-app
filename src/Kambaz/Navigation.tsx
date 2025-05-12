@@ -73,7 +73,7 @@ export default function KambazNavigation() {
         to="/Kambaz/Courses/Navigation"
         as={Link}
         className={`text-center border-0 ${
-          isActive("/Kambaz/Courses/Navigation")
+          isActive("/Kambaz/Courses")
             ? "bg-white text-danger"
             : "bg-black text-white"
         }`}

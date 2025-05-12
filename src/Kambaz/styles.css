@@ -12,4 +12,9 @@ body * {
   }
 }
 
-
+/* Courses navigation bar active style */
+.list-group.wd > .list-group-item.active {
+  color: black;
+  background-color: white;
+  border-left: 3px solid black !important;
+}
