@@ -39,3 +39,8 @@ body * {
 .bg-gray-fill {
   background-color: #f2f4f4;
 }
+
+/* People table style */
+.wd-first-name, .wd-last-name {
+  font-size: 13px;
+}

@@ -76,11 +76,11 @@ export default function CourseNavigation() {
       </ListGroup.Item>
 
       <ListGroup.Item
-        to="/Kambaz/Courses/1234/People"
+        to="/Kambaz/Courses/:cid/People"
         as={Link}
         id="wd-course-people-link"
         className={`list-group-item border-0 ${
-          isActive("/Kambaz/Courses/1234/People") ? "active text-black" : "text-danger"
+          isActive("/Kambaz/Courses/:cid/People") ? "active text-black" : "text-danger"
         }`}
       >
         People{" "}

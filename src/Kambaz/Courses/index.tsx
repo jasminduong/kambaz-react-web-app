@@ -5,6 +5,7 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { FaAlignJustify } from "react-icons/fa";
+import PeopleTable from "./People/Table";
 
 /* Course page layout and route configuration for course tools (home, modules, assignments, assignment editor) */
 export default function Courses() {
@@ -32,7 +33,7 @@ export default function Courses() {
             <Route path="Zoom" element={<h2>Zoom</h2>} />
             <Route path="Quizzes" element={<h2>Quizzes</h2>} />
             <Route path="Grades" element={<h2>Grades</h2>} />
-            <Route path="People" element={<h2>People</h2>} />
+            <Route path="People" element={<PeopleTable />} />
           </Routes>
         </div>
       </div>
