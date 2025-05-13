@@ -1,13 +1,14 @@
 import { ListGroup } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 
+/* Course sidebar navigation with links to sections (home, modules, piazza, zoom, assignments, quizzes, people) */
 export default function CourseNavigation() {
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div id="wd-courses-navigation" className="wd list-group fs-6 rounded-0">
+    <div id="wd-courses-navigation" className="wd list-group fs-6 rounded-0 me-4">
       <ListGroup.Item
         to="/Kambaz/Courses/1234/Home"
         as={Link}

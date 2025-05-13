@@ -2,11 +2,12 @@ import { Card, Col, ListGroup, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { MdOutlineAssignment } from "react-icons/md";
 
+/* Dashboard with 7 courses linked to a course */
 export default function Dashboard() {
   return (
     <div id="wd-dashboard" style={{ textAlign: "left" }}>
-      <h2 id="wd-dashboard-title">Dashboard</h2> <hr />
-      <h5 id="wd-dashboard-published">Published Courses (7)</h5> <hr />
+      <h3 id="wd-dashboard-title">Dashboard</h3> <hr />
+      <h6 id="wd-dashboard-published">Published Courses (7)</h6> <hr />
       <div id="wd-dashboard-courses">
         <div className="wd-dashboard-course">
           <Row xs={1} md={2} lg={4} className="g-4">

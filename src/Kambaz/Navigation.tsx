@@ -8,7 +8,7 @@ import { FiGitlab } from "react-icons/fi";
 
 import { ListGroup } from "react-bootstrap";
 
-/* Kambaz Sidebar navigation with links to main sections */
+/* Kambaz Sidebar navigation with links to main sections (northeastern, account, dashboard, calendar, inbox) */
 export default function KambazNavigation() {
   const location = useLocation();
 

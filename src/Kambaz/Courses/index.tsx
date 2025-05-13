@@ -6,16 +6,16 @@ import AssignmentEditor from "./Assignments/Editor";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { FaAlignJustify } from "react-icons/fa";
 
-/* Course page layout and route configuration for course tools */
+/* Course page layout and route configuration for course tools (home, modules, assignments, assignment editor) */
 export default function Courses() {
   return (
     <div id="wd-courses">
       {/* applies text color red */}
-      <h2 className="text-danger">
+      <h3 className="text-danger">
         {/* applies spacing in front of menu hamburger */}
         <FaAlignJustify className="me-4 fs-4 mb-1" />
         Course 1234
-      </h2>
+      </h3>
       <hr />
       <div className="d-flex">
         <div className="d-none d-md-block">

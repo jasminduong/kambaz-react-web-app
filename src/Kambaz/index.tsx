@@ -5,7 +5,7 @@ import KambazNavigation from "./Navigation";
 import Courses from "./Courses";
 import "./styles.css";
 
-/* Main Kambaz layout and route definitions for all subpages */
+/* Main Kambaz layout and route definitions for all subpages (account, dashboard, courses, calendar, inbox) */
 export default function Kambaz() {
   return (
     <div id="wd-kambaz" style={{ textAlign: "left" }}>
