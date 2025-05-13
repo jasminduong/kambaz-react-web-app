@@ -11,7 +11,10 @@ export default function Dashboard() {
       <div id="wd-dashboard-courses">
         <div className="wd-dashboard-course">
           <Row xs={1} md={2} lg={4} className="g-4">
-            <Col className="wd-dashboard-course" style={{ marginTop: "30px", marginBottom: "30px" }}>
+            <Col
+              className="wd-dashboard-course"
+              style={{ marginTop: "30px", marginBottom: "30px" }}
+            >
               <Link
                 to="/Kambaz/Courses/1234/Home"
                 className="wd-dashboard-course-link text-decoration-none text-dark"
@@ -22,7 +25,7 @@ export default function Dashboard() {
                     src="/images/reactjs.png"
                     style={{ width: "100%", height: "120px" }}
                   />
-                  <Card.Body className="p-1" style={{marginTop: 10}}>
+                  <Card.Body className="p-1" style={{ marginTop: 10 }}>
                     <Card.Title
                       className="wd-dashboard-course-title text-nowrap overflow-hidden"
                       style={{ fontSize: 14, color: "#0A64A9" }}
@@ -41,7 +44,7 @@ export default function Dashboard() {
                       Full-Stack Software Development{" "}
                     </Card.Text>
                     <ListGroup.Item
-                      to="/Courses/Assignments"
+                      to="/Kambaz/Courses/1234/Assignments"
                       as={Link}
                       className="text-start border-0 text-black"
                     >
@@ -52,7 +55,10 @@ export default function Dashboard() {
               </Link>
             </Col>
 
-            <Col className="wd-dashboard-course" style={{ marginTop: "30px", marginBottom: "30px" }}>
+            <Col
+              className="wd-dashboard-course"
+              style={{ marginTop: "30px", marginBottom: "30px" }}
+            >
               <Link
                 to="/Kambaz/Courses/1234/Home"
                 className="wd-dashboard-course-link text-decoration-none text-dark"
@@ -63,7 +69,7 @@ export default function Dashboard() {
                     src="/images/engineeringDesign.png"
                     style={{ width: "100%", height: "120px" }}
                   />
-                  <Card.Body className="p-1" style={{marginTop: 10}}>
+                  <Card.Body className="p-1" style={{ marginTop: 10 }}>
                     <Card.Title
                       className="wd-dashboard-course-title text-nowrap overflow-hidden"
                       style={{ fontSize: 14, color: "#763A98" }}
@@ -82,7 +88,7 @@ export default function Dashboard() {
                       Engineering Design Process{" "}
                     </Card.Text>
                     <ListGroup.Item
-                      to="/Courses/Assignments"
+                      to="/Kambaz/Courses/1234/Assignments"
                       as={Link}
                       className="text-start border-0 text-black"
                     >
@@ -93,7 +99,10 @@ export default function Dashboard() {
               </Link>
             </Col>
 
-            <Col className="wd-dashboard-course" style={{ marginTop: "30px", marginBottom: "30px" }}>
+            <Col
+              className="wd-dashboard-course"
+              style={{ marginTop: "30px", marginBottom: "30px" }}
+            >
               <Link
                 to="/Kambaz/Courses/1234/Home"
                 className="wd-dashboard-course-link text-decoration-none text-dark"
@@ -104,7 +113,7 @@ export default function Dashboard() {
                     src="/images/experienceDesign.png"
                     style={{ width: "100%", height: "120px" }}
                   />
-                  <Card.Body className="p-1" style={{marginTop: 10}}>
+                  <Card.Body className="p-1" style={{ marginTop: 10 }}>
                     <Card.Title
                       className="wd-dashboard-course-title text-nowrap overflow-hidden"
                       style={{ fontSize: 14, color: "#1D6B7F" }}
@@ -123,7 +132,7 @@ export default function Dashboard() {
                       Designing for User Experiences{" "}
                     </Card.Text>
                     <ListGroup.Item
-                      to="/Courses/Assignments"
+                      to="/Kambaz/Courses/1234/Assignments"
                       as={Link}
                       className="text-start border-0 text-black"
                     >
@@ -134,7 +143,10 @@ export default function Dashboard() {
               </Link>
             </Col>
 
-            <Col className="wd-dashboard-course" style={{ marginTop: "30px", marginBottom: "30px" }}>
+            <Col
+              className="wd-dashboard-course"
+              style={{ marginTop: "30px", marginBottom: "30px" }}
+            >
               <Link
                 to="/Kambaz/Courses/1234/Home"
                 className="wd-dashboard-course-link text-decoration-none text-dark"
@@ -145,7 +157,7 @@ export default function Dashboard() {
                     src="/images/techHumanValues.png"
                     style={{ width: "100%", height: "120px" }}
                   />
-                  <Card.Body className="p-1" style={{marginTop: 10}}>
+                  <Card.Body className="p-1" style={{ marginTop: 10 }}>
                     <Card.Title
                       className="wd-dashboard-course-title text-nowrap overflow-hidden"
                       style={{ fontSize: 14, color: "#763A98" }}
@@ -164,7 +176,7 @@ export default function Dashboard() {
                       Ethics of Robots and AI{" "}
                     </Card.Text>
                     <ListGroup.Item
-                      to="/Courses/Assignments"
+                      to="/Kambaz/Courses/1234/Assignments"
                       as={Link}
                       className="text-start border-0 text-black"
                     >
@@ -175,7 +187,10 @@ export default function Dashboard() {
               </Link>
             </Col>
 
-            <Col className="wd-dashboard-course" style={{ marginTop: "30px", marginBottom: "30px" }}>
+            <Col
+              className="wd-dashboard-course"
+              style={{ marginTop: "30px", marginBottom: "30px" }}
+            >
               <Link
                 to="/Kambaz/Courses/1234/Home"
                 className="wd-dashboard-course-link text-decoration-none text-dark"
@@ -186,7 +201,7 @@ export default function Dashboard() {
                     src="/images/psychology.png"
                     style={{ width: "100%", height: "120px" }}
                   />
-                  <Card.Body className="p-1" style={{marginTop: 10}}>
+                  <Card.Body className="p-1" style={{ marginTop: 10 }}>
                     <Card.Title
                       className="wd-dashboard-course-title text-nowrap overflow-hidden"
                       style={{ fontSize: 14, color: "#AC3017" }}
@@ -205,7 +220,7 @@ export default function Dashboard() {
                       Foundations of Psychology{" "}
                     </Card.Text>
                     <ListGroup.Item
-                      to="/Courses/Assignments"
+                      to="/Kambaz/Courses/1234/Assignments"
                       as={Link}
                       className="text-start border-0 text-black"
                     >
@@ -216,7 +231,10 @@ export default function Dashboard() {
               </Link>
             </Col>
 
-            <Col className="wd-dashboard-course" style={{ marginTop: "30px", marginBottom: "30px" }}>
+            <Col
+              className="wd-dashboard-course"
+              style={{ marginTop: "30px", marginBottom: "30px" }}
+            >
               <Link
                 to="/Kambaz/Courses/1234/Home"
                 className="wd-dashboard-course-link text-decoration-none text-dark"
@@ -227,7 +245,7 @@ export default function Dashboard() {
                     src="/images/co-op.png"
                     style={{ width: "100%", height: "120px" }}
                   />
-                  <Card.Body className="p-1" style={{marginTop: 10}}>
+                  <Card.Body className="p-1" style={{ marginTop: 10 }}>
                     <Card.Title
                       className="wd-dashboard-course-title text-nowrap overflow-hidden"
                       style={{ fontSize: 14, color: "#1D6B7F" }}
@@ -246,7 +264,7 @@ export default function Dashboard() {
                       Professional Development{" "}
                     </Card.Text>
                     <ListGroup.Item
-                      to="/Courses/Assignments"
+                      to="/Kambaz/Courses/1234/Assignments"
                       as={Link}
                       className="text-start border-0 text-black"
                     >
@@ -257,7 +275,10 @@ export default function Dashboard() {
               </Link>
             </Col>
 
-            <Col className="wd-dashboard-course" style={{ marginTop: "30px", marginBottom: "30px" }}>
+            <Col
+              className="wd-dashboard-course"
+              style={{ marginTop: "30px", marginBottom: "30px" }}
+            >
               <Link
                 to="/Kambaz/Courses/1234/Home"
                 className="wd-dashboard-course-link text-decoration-none text-dark"
@@ -268,7 +289,7 @@ export default function Dashboard() {
                     src="/images/typography.png"
                     style={{ width: "100%", height: "120px" }}
                   />
-                  <Card.Body className="p-1" style={{marginTop: 10}}>
+                  <Card.Body className="p-1" style={{ marginTop: 10 }}>
                     <Card.Title
                       className="wd-dashboard-course-title text-nowrap overflow-hidden"
                       style={{ fontSize: 14, color: "#763A98" }}
@@ -287,7 +308,7 @@ export default function Dashboard() {
                       Anatomy and History of Typefaces{" "}
                     </Card.Text>
                     <ListGroup.Item
-                      to="/Courses/Assignments"
+                      to="/Kambaz/Courses/1234/Assignments"
                       as={Link}
                       className="text-start border-0 text-black"
                     >
