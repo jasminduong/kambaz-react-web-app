@@ -70,7 +70,7 @@ export default function KambazNavigation() {
       </ListGroup.Item>
 
       <ListGroup.Item
-        to="/Kambaz/Courses/Navigation"
+        to="/Kambaz/Courses/1234/Home"
         as={Link}
         className={`text-center border-0 ${
           isActive("/Kambaz/Courses")

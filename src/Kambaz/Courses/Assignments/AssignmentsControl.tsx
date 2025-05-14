@@ -3,9 +3,6 @@ import { IoIosSearch } from "react-icons/io";
 import { Button } from "react-bootstrap";
 
 /* Assignments top controls with search bar, group, assignment buttons */
-/*<input placeholder="Search for Assignments" id="wd-search-assignment" />
-<button id="wd-add-assignment-group">+ Group</button>
-<button id="wd-add-assignment">+ Assignment</button>*/
 export default function AssignmentsControl() {
   return (
     <div id="wd-modules-controls" className="d-flex gap-2 text-nowrap">

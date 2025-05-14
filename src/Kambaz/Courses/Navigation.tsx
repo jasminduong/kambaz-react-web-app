@@ -5,7 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 export default function CourseNavigation() {
   const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (pathPrefix: string) =>
+    location.pathname.startsWith(pathPrefix);
 
   return (
     <div id="wd-courses-navigation" className="wd list-group fs-6 rounded-0 me-4">
