@@ -1,40 +1,63 @@
+import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 export default function Profile() {
   return (
     <div id="wd-profile-screen">
-      <h3>Profile</h3>
-      <input
-        defaultValue="alice"
-        placeholder="username"
-        className="wd-username"
+      <h4 id="wd-profile-title">Profile</h4>
+      <Form.Control
+        id="wd-username"
+        placeholder="alice"
+        className="mb-2"
+        style={{ width: "320px" }}
       />
-      <br />
-      <input
-        defaultValue="123"
-        placeholder="password"
-        type="password"
-        className="wd-password"
+
+      <Form.Control
+        id="wd-password"
+        placeholder="123"
+        className="mb-2"
+        style={{ width: "320px" }}
       />
-      <br />
-      <input defaultValue="Alice" placeholder="First Name" id="wd-firstname" />
-      <br />
-      <input
-        defaultValue="Wonderland"
-        placeholder="Last Name"
+
+      <Form.Control
+        id="wd-firstname"
+        placeholder="Alice"
+        className="mb-2"
+        style={{ width: "320px" }}
+      />
+
+      <Form.Control
         id="wd-lastname"
+        placeholder="Wonderland"
+        className="mb-2"
+        style={{ width: "320px" }}
       />
-      <br />
-      <input defaultValue="2000-01-01" type="date" id="wd-dob" />
-      <br />
-      <input defaultValue="alice@wonderland" type="email" id="wd-email" />
-      <br />
-      <select defaultValue="FACULTY" id="wd-role">
-        <option value="USER">User</option> <option value="ADMIN">Admin</option>
-        <option value="FACULTY">Faculty</option>{" "}
-        <option value="STUDENT">Student</option>
-      </select>
-      <br />
-      <Link to="/Kambaz/Account/Signin">Sign out</Link>
+
+      <Form.Control type="date" defaultValue="MM/DD/YYYY" />
+
+      <Form.Control
+        id="wd-email"
+        placeholder="alice@wonderland.com"
+        className="mb-2"
+        style={{ width: "320px" }}
+      />
+
+      <Form.Select
+        defaultValue="Student"
+        className="mb-3"
+        style={{ fontSize: "14px" }}
+      >
+        <option value="Student">Student</option>
+        <option value="Instructor">Instructor</option>
+      </Form.Select>
+
+      <Link
+        id="wd-signout-btn"
+        to="/Kambaz/Account/Signin"
+        className="btn btn-danger w-100 mb-2"
+        style={{ fontSize: "14px" }}
+      >
+        Signout
+      </Link>
     </div>
   );
 }
