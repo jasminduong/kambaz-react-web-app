@@ -19,6 +19,12 @@ body * {
   border-left: 3px solid black !important;
 }
 
+/* Dashboard */
+.g-30 {
+  --bs-gutter-x: 30px;
+  --bs-gutter-y: 30px;
+}
+
 /* Modules lesson style */
 .btn-secondary {
   --bs-btn-color: #000 !important;
@@ -41,7 +47,8 @@ body * {
 }
 
 /* People table style */
-.wd-first-name, .wd-last-name {
+.wd-first-name,
+.wd-last-name {
   font-size: 13px;
 }
 
