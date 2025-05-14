@@ -1,53 +1,128 @@
+import { ListGroup } from "react-bootstrap";
+import AssignmentsControl from "./AssignmentsControl";
+import { BsGripVertical } from "react-icons/bs";
+import AssignmentControlButtons from "./AssignmentControlButtons";
+import { PiNotePencilLight } from "react-icons/pi";
+import IndAssignmentControlButtons from "./IndAssignmentControlButtons";
+
 export default function Assignments() {
   return (
     <div id="wd-assignments">
-      <input placeholder="Search for Assignments" id="wd-search-assignment" />
-      <button id="wd-add-assignment-group">+ Group</button>
-      <button id="wd-add-assignment">+ Assignment</button>
-      <h3 id="wd-assignments-title">
-        ASSIGNMENTS 40% of Total <button>+</button>{" "}
-      </h3>
-      <ul id="wd-assignment-list">
-        <li className="wd-assignment-list-item">
-          <a
-            href="#/Kambaz/Courses/1234/Assignments/123"
-            className="wd-assignment-link"
-          >
-            A1 - ENV + HTML
-          </a>{" "}
-          <div>
-            Multiple Modules | <strong>Not available until</strong> May 6 at
-            12:00am |<br></br>
-            <strong>Due</strong> May 13 at 11:59pm | 100 pts
+      <AssignmentsControl />
+      <br />
+
+      <ListGroup className="rounded-0" id="wd-modules">
+        <ListGroup.Item className="wd-module p-0 mb-5 fs-6 border-lesson-outline">
+          <div className="wd-title p-3 ps-2 bg-gray-fill">
+            <BsGripVertical className="me-2 fs-3" /> ASSIGNMENTS{" "}
+            <AssignmentControlButtons />
           </div>
-        </li>
-        <li className="wd-assignment-list-item">
-          <a
-            href="#/Kambaz/Courses/1234/Assignments/123"
-            className="wd-assignment-link"
-          >
-            A2 - CSS + BOOTCAMP
-          </a>{" "}
-          <div>
-            Multiple Modules | <strong>Not available until</strong> May 13 at
-            12:00am |<br></br>
-            <strong>Due</strong> May 20 at 11:59pm | 100 pts
-          </div>
-        </li>
-        <li className="wd-assignment-list-item">
-          <a
-            href="#/Kambaz/Courses/1234/Assignments/123"
-            className="wd-assignment-link"
-          >
-            A3 - JAVASCRIPT + REACT
-          </a>{" "}
-          <div>
-            Multiple Modules | <strong>Not available until</strong> May 20 at
-            12:00am |<br></br>
-            <strong>Due</strong> May 27 at 11:59pm | 100 pts
-          </div>
-        </li>
-      </ul>
+          <ListGroup className="wd-lessons rounded-0">
+            <ListGroup.Item className="wd-lesson p-3 ps-1">
+              <div className="d-flex align-items-start justify-content-between">
+                <div className="d-flex">
+                  <BsGripVertical className="me-2 fs-3" />
+                  <PiNotePencilLight
+                    className="me-3 fs-4"
+                    style={{ color: "green" }}
+                  />
+                  <div>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div
+                        className="fw-bold me-3"
+                        style={{ fontSize: "16px" }}
+                      >
+                        A1
+                      </div>
+                    </div>
+
+                    <div className="text-muted small mt-1">
+                      <span className="text-danger">Multiple Modules</span> |{" "}
+                      <strong>Not available until</strong> May 6 at 12:00am |
+                      <br />
+                      <strong>Due</strong> May 13 at 11:59pm | 100 pts
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-1">
+                  <IndAssignmentControlButtons />
+                </div>
+              </div>
+            </ListGroup.Item>
+          </ListGroup>
+
+          <ListGroup className="wd-lessons rounded-0">
+            <ListGroup.Item className="wd-lesson p-3 ps-1">
+              <div className="d-flex align-items-start justify-content-between">
+                <div className="d-flex">
+                  <BsGripVertical className="me-2 fs-3" />
+                  <PiNotePencilLight
+                    className="me-3 fs-4"
+                    style={{ color: "green" }}
+                  />
+                  <div>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div
+                        className="fw-bold me-3"
+                        style={{ fontSize: "16px" }}
+                      >
+                        A2
+                      </div>
+                    </div>
+
+                    <div className="text-muted small mt-1">
+                      <span className="text-danger">Multiple Modules</span> |{" "}
+                      <strong>Not available until</strong> May 13 at 12:00am |
+                      <br />
+                      <strong>Due</strong> May 20 at 11:59pm | 100 pts
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-1">
+                  <IndAssignmentControlButtons />
+                </div>
+              </div>
+            </ListGroup.Item>
+          </ListGroup>
+
+          <ListGroup className="wd-lessons rounded-0">
+            <ListGroup.Item className="wd-lesson p-3 ps-1">
+              <div className="d-flex align-items-start justify-content-between">
+                <div className="d-flex">
+                  <BsGripVertical className="me-2 fs-3" />
+                  <PiNotePencilLight
+                    className="me-3 fs-4"
+                    style={{ color: "green" }}
+                  />
+                  <div>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div
+                        className="fw-bold me-3"
+                        style={{ fontSize: "16px" }}
+                      >
+                        A3
+                      </div>
+                    </div>
+
+                    <div className="text-muted small mt-1">
+                      <span className="text-danger">Multiple Modules</span> |{" "}
+                      <strong>Not available until</strong> May 20 at 12:00am |
+                      <br />
+                      <strong>Due</strong> May 27 at 11:59pm | 100 pts
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-1">
+                  <IndAssignmentControlButtons />
+                </div>
+              </div>
+            </ListGroup.Item>
+          </ListGroup>
+        </ListGroup.Item>
+      </ListGroup>
     </div>
   );
 }

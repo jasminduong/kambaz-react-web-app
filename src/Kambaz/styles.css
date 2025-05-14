@@ -44,3 +44,8 @@ body * {
 .wd-first-name, .wd-last-name {
   font-size: 13px;
 }
+
+/* Assignments Control style */
+.form-control {
+  font-size: 14px;
+}
