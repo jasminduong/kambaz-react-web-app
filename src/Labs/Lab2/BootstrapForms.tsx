@@ -70,7 +70,7 @@ export default function BootstrapForms() {
       <br></br>
 
       <div id="wd-css-styling-range-and-sliders">
-        <h3>Range</h3>
+        <h3>Sliders</h3>
         <FormGroup controlId="wd-range1">
           <FormLabel>Example range</FormLabel>
           <FormRange min="0" max="5" step="0.5" />

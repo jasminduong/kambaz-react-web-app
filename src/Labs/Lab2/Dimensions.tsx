@@ -3,7 +3,7 @@ import "./index.css";
 export default function Dimensions() {
   return (
     <div id="wd-css-dimensions">
-      <h2>Dimension</h2>
+      <h2>Dimensions</h2>
       <div>
         <div className="wd-dimension-portrait wd-bg-color-yellow">Portrait</div>
         <div
