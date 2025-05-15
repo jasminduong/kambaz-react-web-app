@@ -20,7 +20,7 @@ export default function KambazNavigation() {
       id="wd-kambaz-navigation"
       style={{ width: 120 }}
       className="rounded-0 position-fixed
-       bottom-0 top-0 d-none d-md-block bg-black z-2"
+       bottom-0 top-0 d-none d-md-block bg-black"
     >
       {/* 
       position-fixed - applies [display: fixed] so that the sidebar stays fixed and doesn't scroll with the rest of the screen

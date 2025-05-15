@@ -7,29 +7,25 @@ export default function Profile() {
       <Form.Control
         id="wd-username"
         placeholder="alice"
-        className="mb-2"
-        style={{ width: "320px" }}
+        className="mb-2 text-input-field"
       />
 
       <Form.Control
         id="wd-password"
         placeholder="123"
-        className="mb-2"
-        style={{ width: "320px" }}
+        className="mb-2 text-input-field"
       />
 
       <Form.Control
         id="wd-firstname"
         placeholder="Alice"
-        className="mb-2"
-        style={{ width: "320px" }}
+        className="mb-2 text-input-field"
       />
 
       <Form.Control
         id="wd-lastname"
         placeholder="Wonderland"
-        className="mb-2"
-        style={{ width: "320px" }}
+        className="mb-2 text-input-field"
       />
 
       <Form.Control type="date" defaultValue="MM/DD/YYYY" />
@@ -37,15 +33,10 @@ export default function Profile() {
       <Form.Control
         id="wd-email"
         placeholder="alice@wonderland.com"
-        className="mb-2"
-        style={{ width: "320px" }}
+        className="mb-2 text-input-field"
       />
 
-      <Form.Select
-        defaultValue="Student"
-        className="mb-3"
-        style={{ fontSize: "14px" }}
-      >
+      <Form.Select id="wd-user-type" defaultValue="Student" className="mb-3">
         <option value="Student">Student</option>
         <option value="Instructor">Instructor</option>
       </Form.Select>
@@ -54,7 +45,6 @@ export default function Profile() {
         id="wd-signout-btn"
         to="/Kambaz/Account/Signin"
         className="btn btn-danger w-100 mb-2"
-        style={{ fontSize: "14px" }}
       >
         Signout
       </Link>

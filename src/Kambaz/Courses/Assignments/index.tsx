@@ -33,10 +33,7 @@ export default function Assignments() {
                     />
                     <div>
                       <div className="d-flex justify-content-between align-items-center">
-                        <div
-                          className="fw-bold me-3"
-                          style={{ fontSize: "16px" }}
-                        >
+                        <div className="fw-bold me-3" id="wd-assignment-title">
                           A1
                         </div>
                       </div>
@@ -73,10 +70,7 @@ export default function Assignments() {
                     />
                     <div>
                       <div className="d-flex justify-content-between align-items-center">
-                        <div
-                          className="fw-bold me-3"
-                          style={{ fontSize: "16px" }}
-                        >
+                        <div className="fw-bold me-3" id="wd-assignment-title">
                           A2
                         </div>
                       </div>
@@ -113,10 +107,7 @@ export default function Assignments() {
                     />
                     <div>
                       <div className="d-flex justify-content-between align-items-center">
-                        <div
-                          className="fw-bold me-3"
-                          style={{ fontSize: "16px" }}
-                        >
+                        <div className="fw-bold me-3" id="wd-assignment-title">
                           A3
                         </div>
                       </div>

@@ -2,8 +2,8 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 export default function AssignmentEditor() {
   return (
-    <Container className="mt-4" id="wd-assignments-editor">
-      <Form style={{ fontSize: "14px" }}>
+    <Container className="mt-4" id="wd-assignments-editor" >
+      <Form >
         <Form.Group className="mb-3">
           <Form.Label>Assignment Name</Form.Label>
           <Form.Control placeholder="A1" />

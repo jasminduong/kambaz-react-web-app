@@ -7,20 +7,18 @@ export default function Signin() {
       <Form.Control
         id="wd-username"
         placeholder="Username"
-        className="mb-2"
-        style={{ width: "320px" }}
+        className="mb-2 text-input-field"
       />
       <Form.Control
         id="wd-password"
         placeholder="Password"
         type="password"
-        className="mb-2"
+        className="mb-2 text-input-field"
       />
       <Link
         id="wd-signin-btn"
         to="/Kambaz/Account/Profile"
         className="btn btn-primary w-100 mb-2"
-        style={{ fontSize: "14px" }}
       >
         Sign in{" "}
       </Link>
@@ -28,7 +26,6 @@ export default function Signin() {
         id="wd-signup-link"
         to="/Kambaz/Account/Signup"
         className="btn w-100 mb-2"
-        style={{ fontSize: "14px" }}
       >
         Sign up
       </Link>

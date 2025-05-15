@@ -7,26 +7,24 @@ export default function Signup() {
       <Form.Control
         id="wd-username"
         placeholder="Username"
-        className="mb-2"
-        style={{ width: "320px" }}
+        className="mb-2 text-input-field"
       />
       <Form.Control
         id="wd-password"
         placeholder="Password"
         type="password"
-        className="mb-2"
+        className="mb-2 text-input-field"
       />
       <Form.Control
         id="wd-verify-password"
         placeholder="Verify password"
         type="password"
-        className="mb-2"
+        className="mb-2 text-input-field"
       />
       <Link
         id="wd-signup-btn"
         to="/Kambaz/Account/Profile"
         className="btn btn-primary w-100 mb-2"
-        style={{ fontSize: "14px" }}
       >
         Signup{" "}
       </Link>
@@ -34,7 +32,6 @@ export default function Signup() {
         id="wd-signin-link"
         to="/Kambaz/Account/Signin"
         className="btn w-100 mb-2"
-        style={{ fontSize: "14px" }}
       >
         Signin
       </Link>
