@@ -10,8 +10,9 @@ import { ListGroup } from "react-bootstrap";
 
 /* Kambaz Sidebar navigation with links to main sections (northeastern, account, dashboard, calendar, inbox) */
 export default function KambazNavigation() {
+  {/* gets the location object that represents the current URL path */}
   const location = useLocation();
-
+  {/* checks if the current page’s URL starts with a given path */}
   const isActive = (pathPrefix: string) =>
     location.pathname.startsWith(pathPrefix);
 

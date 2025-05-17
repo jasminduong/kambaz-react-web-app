@@ -49,12 +49,17 @@ body * {
   margin-left: 10px;
 }
 .wd-dashboard-course-title {
-  font-size: 15px;
+  font-size: 14px;
 }
 .wd-dashboard-course-text {
   min-height: 35px;
   margin-bottom: 0px;
   font-size: 11px;
+}
+
+/* Courses style */
+.course-title {
+  font-size: 18px;
 }
 
 /* Modules lesson style */
