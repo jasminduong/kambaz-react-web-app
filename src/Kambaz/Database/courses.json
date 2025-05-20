@@ -25,7 +25,7 @@
   },
   {
     "_id": "ARTG3462",
-    "name": "ARTG3462 Experience Design...",
+    "name": "ARTG3462 Experience Design Principles",
     "number": "ARTG3462",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",
@@ -37,7 +37,7 @@
   },
   {
     "_id": "PHIL1145",
-    "name": "PHIL1145 Technology and Hu...",
+    "name": "PHIL1145 Technology and Human Values",
     "number": "PHIL1145",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",
@@ -49,7 +49,7 @@
   },
   {
     "_id": "PSYC1101",
-    "name": "PSYC1101 Foundations of Pys...",
+    "name": "PSYC1101 Foundations of Pyschology",
     "number": "PSYCH1101",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",
@@ -61,7 +61,7 @@
   },
   {
     "_id": "EEAM2000",
-    "name": "EEAM2000 Professional Devel...",
+    "name": "EEAM2000 Professional Development",
     "number": "CH1250",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",
@@ -73,7 +73,7 @@
   },
   {
     "_id": "ARTG1290",
-    "name": "ARTG1290 Typographic Syste...",
+    "name": "ARTG1290 Typographic Systems",
     "number": "ME101",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",

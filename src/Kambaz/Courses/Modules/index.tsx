@@ -22,9 +22,8 @@ export default function Modules() {
       <ListGroup className="rounded-0" id="wd-modules">
         {modules
           .filter((module: any) => module.course === cid)
-          .map((module: any, moduleIndex: number) => (
+          .map((module: any) => (
             <ListGroup.Item
-              key={moduleIndex}
               className="wd-module p-0 mb-5 fs-6 border-lesson-outline"
             >
               <div className="wd-title p-3 ps-2 bg-gray-fill">

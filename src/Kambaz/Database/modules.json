@@ -182,13 +182,13 @@
     "lessons": [
       {
         "_id": "L101",
-        "name": "Challenge 1",
+        "name": "Challenge",
         "module": "M1",
         "sub-lessons": [
             {
                 "_id": "L101A",
-                "name": "Your Story of Self",
-                "due-date": "Sep 8, 2024 | 5 pts"
+                "name": "Challenge 1: Your Story of Self",
+                "due-date": "Sep 8, 2024 | 5pts"
             }
         ]
       },
@@ -230,13 +230,13 @@
     "lessons": [
       {
         "_id": "L201",
-        "name": "Challenge 2",
+        "name": "Challenge",
         "module": "M2",
         "sub-lessons": [
             {
                 "_id": "L201A",
-                "name": "Dunker Diagrams and Kepner-Tregoe Problem Analysis",
-                "due-date": "Sep 15, 2024 | 5 pts"
+                "name": "Challenge 2: Kepner-Tregoe Problem Analysis",
+                "due-date": "Sep 15, 2024 | 5pts"
             }
         ]
       },
@@ -278,13 +278,13 @@
     "lessons": [
       {
         "_id": "L301",
-        "name": "Challenge 3",
+        "name": "Challenge",
         "module": "M3",
         "sub-lessons": [
             {
                 "_id": "L301A",
-                "name": "AutoCAD Create and Modify",
-                "due-date": "Sep 22, 2024 | 5 pts"
+                "name": "Challenge 3: AutoCAD Create and Modify",
+                "due-date": "Sep 22, 2024 | 5pts"
             }
         ]
       },
@@ -296,12 +296,12 @@
             {
                 "_id": "L302A",
                 "name": "Exit Ticket 5: AutoCAD Screenshot",
-                "due-date": "Sep 11, 2024 | 1pts"
+                "due-date": "Sep 18, 2024 | 1pts"
             },
             {
                 "_id": "L302B",
                 "name": "Exit Ticket 6: Generating Solutions",
-                "due-date": "Sep 12, 2024 | 1pts"
+                "due-date": "Sep 19, 2024 | 1pts"
             }
         ]
       },
@@ -454,7 +454,7 @@
             {
                 "_id": "L302B",
                 "name": "Group In-class Exercise: INTERPRETATION I",
-                "due-date": "Jan 24, 2025 | 2pts"
+                "due-date": "Jan 31, 2025 | 2pts"
             },
             {
                 "_id": "L302C",
@@ -879,7 +879,7 @@
             {
                 "_id": "L302A",
                 "name": "Midterm Exam",
-                "due-date": "May 22, 2024 | 100ptx"
+                "due-date": "May 22, 2024 | 100pts"
             }
         ]
       },

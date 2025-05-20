@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 body * {
-  font-family: Verdana, Trebuchet MS, sans-serif;
+  font-family: Trebuchet MS, Verdana, Tahoma;
 }
 
 @media (min-width: 768px) {
