@@ -44,6 +44,18 @@ export default function TOC() {
       </Nav.Item>
       <Nav.Item>
         {" "}
+        <Nav.Link
+          as={Link}
+          to="/Labs/Lab4"
+          id="wd-a3"
+          active={pathname.includes("Lab4")}
+        >
+          {" "}
+          Lab 4{" "}
+        </Nav.Link>{" "}
+      </Nav.Item>
+      <Nav.Item>
+        {" "}
         <Nav.Link as={Link} to="/Kambaz" id="wd-a3">
           {" "}
           Kambaz{" "}
@@ -62,26 +74,3 @@ export default function TOC() {
   );
 }
 
-/*import { Link } from "react-router-dom";
-
-export default function TOC() {
-  return (
-    <ul>
-      <li>
-        <Link to="/Labs">Labs</Link>
-      </li>
-      <li>
-        <Link to="/Labs/Lab1">Lab 1</Link>
-      </li>
-      <li>
-        <Link to="/Labs/Lab2">Lab 2</Link>
-      </li>
-      <li>
-        <Link to="/Labs/Lab3">Lab 3</Link>
-      </li>
-      <li>
-        <Link to="/Kambaz">Kambaz</Link>
-      </li>
-    </ul>
-  );
-}*/
