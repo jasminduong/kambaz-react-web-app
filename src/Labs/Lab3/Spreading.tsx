@@ -6,11 +6,11 @@ export default function Spreading() {
   const obj3 = { ...obj1, b: 4 };
   return (
     <div id="wd-spreading">
-      <h2>Spread Operator</h2>
-      <h3>Array Spread</h3>
+      <h4>Spread Operator</h4>
+      <h5>Array Spread</h5>
       arr1 = {JSON.stringify(arr1)} <br />
-      arr2 = {JSON.stringify(arr2)} <br />
-      <h3>Object Spread</h3>
+      arr2 = {JSON.stringify(arr2)} <br /> <br />
+      <h5>Object Spread</h5>
       {JSON.stringify(obj1)} <br />
       {JSON.stringify(obj2)} <br />
       {JSON.stringify(obj3)} <br /> <hr />

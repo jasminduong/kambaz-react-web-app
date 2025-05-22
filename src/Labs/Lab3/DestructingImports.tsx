@@ -3,7 +3,7 @@ import * as Matematica from "./Math";
 export default function DestructingImports() {
   return (
     <div id="wd-destructuring-imports">
-      <h2>Destructing Imports</h2>
+      <h4>Destructing Imports</h4>
       <table className="table table-sm">
         <thead>
           <tr>

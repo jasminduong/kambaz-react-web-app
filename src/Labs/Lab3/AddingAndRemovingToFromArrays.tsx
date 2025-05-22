@@ -9,7 +9,7 @@ export default function AddingAndRemovingToFromArrays() {
   stringArray1.splice(1, 1);
   return (
     <div id="wd-adding-removing-from-arrays">
-      <h4>Add/remove to/from arrays</h4>
+      <h4>Add/Remove To/From Arrays</h4>
       numberArray1 = {numberArray1} <br />
       stringArray1 = {stringArray1} <br />
       Todo list:

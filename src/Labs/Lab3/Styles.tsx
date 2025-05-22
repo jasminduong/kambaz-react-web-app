@@ -13,7 +13,7 @@ export default function Styles() {
   };
   return (
     <div id="wd-styles">
-      <h2>Styles</h2>
+      <h4>Styles</h4>
       <div
         style={{
           backgroundColor: "lightyellow",
@@ -25,6 +25,7 @@ export default function Styles() {
       </div>
       <div style={bgRed}> Red background </div>
       <div style={bgBlue}>Blue background</div>
+      <hr></hr>
     </div>
   );
 }

@@ -40,6 +40,7 @@ export default function Lab3() {
       <BooleanVariables />
       <IfElse />
       <TenaryOperator />
+      <h4>Conditional Output If Else</h4> 
       <ConditionalOutputIfElse />
       <LegacyFunctions />
       <ArrowFunctions />
@@ -61,7 +62,8 @@ export default function Lab3() {
       <Classes />
       <Styles />
       <Add a={3} b={4} />
-      <h4>Square of 4</h4>
+      <h4>Child Components</h4>
+      <h5>Square of 4</h5>
       <Square>4</Square>
       <hr />
       <Highlight>
@@ -70,6 +72,7 @@ export default function Lab3() {
         excepturi consectetur. Modi omnis minus sequi maiores, provident
         voluptates.
       </Highlight>
+      <hr></hr>
       <PathParameters />
     </div>
   );

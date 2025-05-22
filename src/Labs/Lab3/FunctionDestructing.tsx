@@ -5,7 +5,7 @@ export default function FunctionDestructing() {
   const difference = subtract({ a: 4, b: 2 });
   return (
     <div id="wd-function-destructing">
-      <h2>Function Destructing</h2>
+      <h4>Function Destructing</h4>
       const add = (a, b) =&gt; a + b;
       <br />
       const sum = add(1, 2);
