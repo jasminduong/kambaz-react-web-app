@@ -13,7 +13,7 @@ import FunctionDestructing from "./FunctionDestructing";
 import House from "./House";
 import IfElse from "./IfElse";
 import JsonStringify from "./JsonStringify";
-//import ImpliedReturn from "./ImpliedReturn";
+import ImpliedReturn from "./ImpliedReturn";
 import LegacyFunctions from "./LegacyFunctions";
 import MapFunction from "./MapFunction";
 import SimpleArrays from "./SimpleArrays";
@@ -44,6 +44,7 @@ export default function Lab3() {
       <ConditionalOutputIfElse />
       <LegacyFunctions />
       <ArrowFunctions />
+      <ImpliedReturn />
       <TemplateLiterals />
       <SimpleArrays />
       <AddingAndRemovingToFromArrays />
