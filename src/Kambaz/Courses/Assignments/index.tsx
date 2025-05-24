@@ -5,7 +5,7 @@ import AssignmentControlButtons from "./AssignmentControlButtons";
 import { PiNotePencilLight } from "react-icons/pi";
 import IndAssignmentControlButtons from "./IndAssignmentControlButtons";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import * as db from "../../Database";
 
 export default function Assignments() {
@@ -56,9 +56,11 @@ export default function Assignments() {
                             <span className="text-danger">
                               {assignment.module}
                             </span>{" "}
-                            | <strong>Not available until</strong> {assignment.availableDate} |
+                            | <strong>Not available until</strong>{" "}
+                            {assignment.availableDate} |
                             <br />
-                            <strong>Due</strong> {assignment.dueDate} | {assignment.points}pts
+                            <strong>Due</strong> {assignment.dueDate} |{" "}
+                            {assignment.points}pts
                           </div>
                         </div>
                       </div>
