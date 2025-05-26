@@ -1,6 +1,6 @@
 [
   {
-    "_id": "CS5610",
+    "_id": "CS5610-1",
     "name": "Week 1",
     "description": "Introduction to Web Development and Setting up Environment",
     "course": "CS5610",
@@ -57,7 +57,7 @@
     ]
   },
   {
-    "_id": "CS5610",
+    "_id": "CS5610-2",
     "name": "Week 2",
     "description": "Creating user interfaces using HTML",
     "course": "CS5610",
@@ -114,7 +114,7 @@
     ]
   },
   {
-    "_id": "CS5610",
+    "_id": "CS5610-3",
     "name": "Week 3",
     "description": "Styling with CSS",
     "course": "CS5610",
@@ -175,7 +175,7 @@
     ]
   },
   {
-    "_id": "GE1110",
+    "_id": "GE1110-1",
     "name": "Week 1",
     "description": "Introduction to Engineering Design",
     "course": "GE1110",
@@ -223,7 +223,7 @@
     ]
   },
   {
-    "_id": "GE1110",
+    "_id": "GE1110-2",
     "name": "Week 2",
     "description": "Tackling engineering design problems",
     "course": "GE1110",
@@ -271,7 +271,7 @@
     ]
   },
   {
-    "_id": "GE1110",
+    "_id": "GE1110-3",
     "name": "Week 3",
     "description": "Introduction to AutoCAD",
     "course": "GE1110",
@@ -319,7 +319,7 @@
     ]
   },
   {
-    "_id": "ARTG3462",
+    "_id": "ARTG3462-1",
     "name": "Week 1",
     "description": "Introduction to Experience Design Principles",
     "course": "ARTG3462",
@@ -379,7 +379,7 @@
     ]
   },
   {
-    "_id": "ARTG3462",
+    "_id": "ARTG3462-2",
     "name": "Week 2",
     "description": "Technology as Experience Framework",
     "course": "ARTG3462",
@@ -424,7 +424,7 @@
     ]
   },
   {
-    "_id": "ARTG3462",
+    "_id": "ARTG3462-3",
     "name": "Week 3",
     "description": "Storytelling and Sensemaking",
     "course": "ARTG3462",
@@ -465,7 +465,7 @@
     ]
   },
   {
-    "_id": "PHIL1145",
+    "_id": "PHIL1145-1",
     "name": "Week 1 - Introduction to the Philosophy of Robots",
     "description": "Introduction to the Philosophy of Robots",
     "course": "PHIL1145",
@@ -488,7 +488,7 @@
     ]
   },
   {
-    "_id": "PHIL1145",
+    "_id": "PHIL1145-2",
     "name": "Week 2 - What is a Robot?",
     "description": "What is a Robot?",
     "course": "PHIL1145",
@@ -523,7 +523,7 @@
     ]
   },
   {
-    "_id": "PHIL1145",
+    "_id": "PHIL1145-3",
     "name": "Week 3 - Should We Work?",
     "description": "Should We Work?",
     "course": "PHIL1145",
@@ -558,7 +558,7 @@
     ]
   },
   {
-    "_id": "PSYC1101",
+    "_id": "PSYC1101-1",
     "name": "Week 1",
     "description": "Introduction to Psychology",
     "course": "PSYC1101",
@@ -577,7 +577,7 @@
     ]
   },
   {
-    "_id": "PSYC1101",
+    "_id": "PSYC1101-2",
     "name": "Week 2",
     "description": "Psychological Science and Genes",
     "course": "PSYC1101",
@@ -600,7 +600,7 @@
     ]
   },
   {
-    "_id": "PSYC1101",
+    "_id": "PSYC1101-3",
     "name": "Week 3",
     "description": "Developmental Psychology",
     "course": "PSYC1101",
@@ -635,7 +635,7 @@
     ]
   },
   {
-    "_id": "EEAM2000",
+    "_id": "EEAM2000-1",
     "name": "Week 1 - Resumes",
     "description": "Resumes",
     "course": "EEAM2000",
@@ -679,7 +679,7 @@
     ]
   },
   {
-    "_id": "EEAM2000",
+    "_id": "EEAM2000-1",
     "name": "Week 2 - Portfolios",
     "description": "Portfolios",
     "course": "EEAM2000",
@@ -718,7 +718,7 @@
     ]
   },
   {
-    "_id": "EEAM2000",
+    "_id": "EEAM2000-2",
     "name": "Week 3 - Job Search & Cover Letters",
     "description": "Job Search and Cover Letters",
     "course": "EEAM2000",
@@ -772,7 +772,7 @@
     ]
   },
   {
-    "_id": "ARTG1290",
+    "_id": "ARTG1290-1",
     "name": "Week 1",
     "description": "Type Anatomy",
     "course": "ARTG1290",
@@ -811,7 +811,7 @@
     ]
   },
   {
-    "_id": "ARTG1290",
+    "_id": "ARTG1290-2",
     "name": "Week 2",
     "description": "Type Anatomy and History",
     "course": "ARTG1290",
@@ -855,7 +855,7 @@
     ]
   },
   {
-    "_id": "ARTG1290",
+    "_id": "ARTG1290-3",
     "name": "Week 3",
     "description": "Type Anatomy",
     "course": "ARTG1290",

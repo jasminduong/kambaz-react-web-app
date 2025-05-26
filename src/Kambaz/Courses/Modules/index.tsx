@@ -1,12 +1,12 @@
-import { ListGroup } from "react-bootstrap";
+import { FormControl, ListGroup } from "react-bootstrap";
 import ModulesControl from "./ModulesControl";
 import ModuleControlButtons from "./ModuleControlButtons";
 import { BsGripVertical } from "react-icons/bs";
 import LessonControlButtons from "./LessonControlButtons";
 import { useState } from "react";
 import { useParams } from "react-router";
-import * as db from "../../Database";
-import { v4 as uuidv4 } from "uuid";
+import { addModule, editModule, updateModule, deleteModule } from "./reducer";
+import { useSelector, useDispatch } from "react-redux";
 
 /* Modules with all content */
 export default function Modules() {
@@ -14,20 +14,13 @@ export default function Modules() {
     /* retrieves course ID from the URL */
   }
   const { cid } = useParams();
-  const [modules, setModules] = useState<any[]>(db.modules);
 
   // moduleName state variable keeps track of the module name edited in the ModuleEditor dialog
   const [moduleName, setModuleName] = useState("");
 
-  // addModule function creates a new module instance with the moduleName as the name 
-  // and appends it to the end of the modules state variable
-  const addModule = () => {
-    setModules([
-      ...modules,
-      { _id: uuidv4(), name: moduleName, course: cid, lessons: [] },
-    ]);
-    setModuleName("");
-  };
+  // retrieve modules state variables get dispatch to call reducer functions
+  const { modules } = useSelector((state: any) => state.modulesReducer);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -36,7 +29,11 @@ export default function Modules() {
       <ModulesControl
         setModuleName={setModuleName}
         moduleName={moduleName}
-        addModule={addModule}
+        // wrap reducer functions with dispatch clear module name
+        addModule={() => {
+          dispatch(addModule({ name: moduleName, course: cid }));
+          setModuleName("");
+        }}
       />
       <br />
       <br />
@@ -46,8 +43,40 @@ export default function Modules() {
           .map((module: any) => (
             <ListGroup.Item className="wd-module p-0 mb-5 fs-6 border-lesson-outline">
               <div className="wd-title p-3 ps-2 bg-gray-fill">
-                <BsGripVertical className="me-2 fs-3" /> {module.name}{" "}
-                <ModuleControlButtons />
+                <BsGripVertical className="me-2 fs-3" />
+                {!module.editing && module.name}{" "}
+                {/* shows the module name if not editing */}
+                {/* shows the input field if editing
+                when typing edit the module's name
+                if "Enter" key is pressed then set editing field to false to hide the text field */}
+                {module.editing && (
+                  <FormControl
+                    className="w-50 d-inline-block"
+                    onChange={(e) =>
+                      // wrap reducer functions with dispatch
+                      dispatch(
+                        updateModule({ ...module, name: e.target.value })
+                      )
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        // wrap reducer functions with dispatch
+                        dispatch(updateModule({ ...module, editing: false }));
+                      }
+                    }}
+                    defaultValue={module.name}
+                  />
+                )}
+                {/* ModuleControlButtons passes in moduleID and deleteModule and editModule function (set editing to true) */}
+                <ModuleControlButtons
+                  moduleId={module._id}
+                  deleteModule={(moduleId) => {
+                    // wrap reducer functions with dispatch
+                    dispatch(deleteModule(moduleId));
+                  }}
+                  // wrap reducer functions with dispatch
+                  editModule={(moduleId) => dispatch(editModule(moduleId))}
+                />
               </div>
               {module.lessons && (
                 <ListGroup className="wd-lessons rounded-0">
