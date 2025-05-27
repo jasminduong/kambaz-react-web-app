@@ -18,11 +18,12 @@ export default function ModuleControlButtons({
     <div className="float-end">
       <FaPencil
         onClick={() => editModule(moduleId)}
-        className="text-primary me-3"
+        className="me-3"
+        style={{color: "green"}}
       />
 
       <FaTrash
-        className="text-danger me-2 mb-1"
+        className="text-danger me-3 mb-1"
         onClick={() => deleteModule(moduleId)}
       />
       <GreenCheckmark />

@@ -8,6 +8,7 @@ import * as db from "./Database";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ProtectedRoute from "./Account/ProtectedRoute";
+import { useSelector } from "react-redux";
 
 /* Main Kambaz layout and route definitions for all subpages (account, dashboard, courses, calendar, inbox) */
 export default function Kambaz() {
@@ -31,9 +32,17 @@ export default function Kambaz() {
   // addNewCourse event handler sets courses as copy of current courses state array
   // uuidv4 generates a randomly generated unique 128-bit identifier
   // and adds course at the end of the array, overriding _id to current time stamp
+
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
   const addNewCourse = () => {
     const newCourse = { ...course, _id: uuidv4() };
     setCourses([...courses, newCourse]);
+    db.enrollments.push({
+      _id: uuidv4(),
+      user: currentUser._id,
+      course: newCourse._id,
+    });
   };
 
   // deleteCourse event handler accepts ID of course to remove by filtering out the course by its ID

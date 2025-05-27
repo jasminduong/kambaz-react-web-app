@@ -22,6 +22,8 @@ export default function Modules() {
   const { modules } = useSelector((state: any) => state.modulesReducer);
   const dispatch = useDispatch();
 
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
   return (
     <div>
       {/* setModuleName and addModule functions are passed to the ModulesControls component 
@@ -49,7 +51,7 @@ export default function Modules() {
                 {/* shows the input field if editing
                 when typing edit the module's name
                 if "Enter" key is pressed then set editing field to false to hide the text field */}
-                {module.editing && (
+                {currentUser.role === "FACULTY" && module.editing && (
                   <FormControl
                     className="w-50 d-inline-block"
                     onChange={(e) =>
@@ -68,7 +70,7 @@ export default function Modules() {
                   />
                 )}
                 {/* ModuleControlButtons passes in moduleID and deleteModule and editModule function (set editing to true) */}
-                <ModuleControlButtons
+                {currentUser.role === "FACULTY" && ( <ModuleControlButtons
                   moduleId={module._id}
                   deleteModule={(moduleId) => {
                     // wrap reducer functions with dispatch
@@ -76,7 +78,7 @@ export default function Modules() {
                   }}
                   // wrap reducer functions with dispatch
                   editModule={(moduleId) => dispatch(editModule(moduleId))}
-                />
+                /> )}
               </div>
               {module.lessons && (
                 <ListGroup className="wd-lessons rounded-0">

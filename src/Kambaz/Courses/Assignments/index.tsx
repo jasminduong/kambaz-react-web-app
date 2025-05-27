@@ -7,6 +7,7 @@ import IndAssignmentControlButtons from "./IndAssignmentControlButtons";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import * as db from "../../Database";
+import { useSelector } from "react-redux";
 
 export default function Assignments() {
   {
@@ -14,6 +15,8 @@ export default function Assignments() {
   }
   const { cid } = useParams();
   const assignments = db.assignments;
+
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   return (
     <div id="wd-assignments">
@@ -30,47 +33,49 @@ export default function Assignments() {
             {assignments
               .filter((assignment: any) => assignment.course === cid)
               .map((assignment: any) => (
-                <Link
-                  to={`/Kambaz/Courses/${assignment.course}/Assignments/Editor/${assignment._id}`}
-                  className="text-decoration-none"
-                >
-                  <ListGroup.Item className="wd-lesson p-3 ps-1">
-                    <div className="d-flex align-items-start justify-content-between">
-                      <div className="d-flex">
-                        <BsGripVertical className="me-2 fs-3" />
-                        <PiNotePencilLight
-                          className="me-3 fs-4"
-                          style={{ color: "green" }}
-                        />
-                        <div>
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div
-                              className="fw-semibold me-3"
-                              id="wd-assignment-title"
-                            >
-                              {assignment.title}
-                            </div>
-                          </div>
-
-                          <div className="text-muted small mt-1">
-                            <span className="text-danger">
-                              {assignment.module}
-                            </span>{" "}
-                            | <strong>Not available until</strong>{" "}
-                            {assignment.availableDate} |
-                            <br />
-                            <strong>Due</strong> {assignment.dueDate} |{" "}
-                            {assignment.points}pts
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <div className="d-flex align-items-start justify-content-between">
+                    <div className="d-flex">
+                      <BsGripVertical className="me-2 fs-3" />
+                      {currentUser.role === "FACULTY" && (
+                        <Link
+                          to={`/Kambaz/Courses/${assignment.course}/Assignments/Editor/${assignment._id}`}
+                          className="text-decoration-none"
+                        >
+                          <PiNotePencilLight
+                            className="me-3 fs-4"
+                            style={{ color: "green" }}
+                          />{" "}
+                        </Link>
+                      )}
+                      <div>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div
+                            className="fw-semibold me-3"
+                            id="wd-assignment-title"
+                          >
+                            {assignment.title}
                           </div>
                         </div>
-                      </div>
 
-                      <div className="mt-1">
-                        <IndAssignmentControlButtons />
+                        <div className="text-muted small mt-1">
+                          <span className="text-danger">
+                            {assignment.module}
+                          </span>{" "}
+                          | <strong>Not available until</strong>{" "}
+                          {assignment.availableDate} |
+                          <br />
+                          <strong>Due</strong> {assignment.dueDate} |{" "}
+                          {assignment.points}pts
+                        </div>
                       </div>
                     </div>
-                  </ListGroup.Item>
-                </Link>
+
+                    <div className="mt-1">
+                      <IndAssignmentControlButtons />
+                    </div>
+                  </div>
+                </ListGroup.Item>
               ))}
           </ListGroup>
         </ListGroup.Item>

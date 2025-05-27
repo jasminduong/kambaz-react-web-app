@@ -1,9 +1,15 @@
 import { ListGroup } from "react-bootstrap";
 import { useLocation, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function AccountNavigation() {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
+  // if currentUser is not empty, display "profile"
+  // otherwise display "signin" and "signup"
+  const links = currentUser ? ["Profile"] : ["Signin", "Signup"];
 
   return (
     <ListGroup
@@ -11,41 +17,20 @@ export default function AccountNavigation() {
       style={{ width: 120 }}
       className="wd list-group fs-6 rounded-0 me-4"
     >
-      <ListGroup.Item
-        to="/Kambaz/Account/Signin"
-        as={Link}
-        className={`list-group-item border-0 ${
-          isActive("/Kambaz/Account/Signin")
-            ? "active text-black"
-            : "text-danger"
-        }`}
-      >
-        Signin{" "}
-      </ListGroup.Item>
-
-      <ListGroup.Item
-        to="/Kambaz/Account/Signup"
-        as={Link}
-        className={`list-group-item border-0 ${
-          isActive("/Kambaz/Account/Signup")
-            ? "active text-black"
-            : "text-danger"
-        }`}
-      >
-        Signup{" "}
-      </ListGroup.Item>
-
-      <ListGroup.Item
-        to="/Kambaz/Account/Profile"
-        as={Link}
-        className={`list-group-item border-0 ${
-          isActive("/Kambaz/Account/Profile")
-            ? "active text-black"
-            : "text-danger"
-        }`}
-      >
-        Profile{" "}
-      </ListGroup.Item>
+      {links.map((link) => (
+        <ListGroup.Item
+          key={link}
+          to={`/Kambaz/Account/${link}`}
+          as={Link}
+          className={`list-group-item border-0 ${
+            isActive(`/Kambaz/Account/${link}`)
+              ? "active text-black"
+              : "text-danger"
+          }`}
+        >
+          {link}
+        </ListGroup.Item>
+      ))}
     </ListGroup>
   );
 }
