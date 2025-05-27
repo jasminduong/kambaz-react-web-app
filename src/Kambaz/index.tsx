@@ -7,6 +7,7 @@ import "./styles.css";
 import * as db from "./Database";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import ProtectedRoute from "./Account/ProtectedRoute";
 
 /* Main Kambaz layout and route definitions for all subpages (account, dashboard, courses, calendar, inbox) */
 export default function Kambaz() {
@@ -64,17 +65,26 @@ export default function Kambaz() {
             path="/Dashboard"
             element={
               // Kambaz owns the state and logic, and passes them down to Dashboard
-              <Dashboard
-                courses={courses}
-                course={course}
-                setCourse={setCourse}
-                addNewCourse={addNewCourse}
-                deleteCourse={deleteCourse}
-                updateCourse={updateCourse}
-              />
+              <ProtectedRoute>
+                <Dashboard
+                  courses={courses}
+                  course={course}
+                  setCourse={setCourse}
+                  addNewCourse={addNewCourse}
+                  deleteCourse={deleteCourse}
+                  updateCourse={updateCourse}
+                />
+              </ProtectedRoute>
             }
           />
-          <Route path="/Courses/:cid/*" element={<Courses courses={courses} />} />
+          <Route
+            path="/Courses/:cid/*"
+            element={
+              <ProtectedRoute>
+                <Courses courses={courses} />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/Calendar" element={<h1>Calendar</h1>} />
           <Route path="/Inbox" element={<h1>Inbox</h1>} />
         </Routes>

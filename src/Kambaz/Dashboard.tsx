@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { PiNotePencilLight } from "react-icons/pi";
 import { LiaBookSolid } from "react-icons/lia";
 import { FiTrash } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import * as db from "./Database";
 
 /* Dashboard with 7 courses linked to a course */
 export default function Dashboard({
@@ -24,6 +26,9 @@ export default function Dashboard({
   updateCourse: () => void;
 }) {
   const [isEditing, setIsEditing] = useState(false);
+
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const { enrollments } = db;
 
   return (
     <div id="wd-dashboard">
@@ -80,75 +85,84 @@ export default function Dashboard({
       <div id="wd-dashboard-courses">
         <div className="wd-dashboard-course">
           <Row xs={1} md={2} lg={4} className="g-30" id="wd-courses-row">
-            {courses.map((course) => (
-              <Col className="wd-dashboard-course">
-                <Card id="wd-course-card">
-                  <Link
-                    to={`/Kambaz/Courses/${course._id}/Home`}
-                    className="wd-dashboard-course-link text-decoration-none text-dark"
-                  >
-                    {/* dynamically renders course image from database */}
-                    <Card.Img
-                      variant="top"
-                      src={course.image}
-                      id="wd-course-img"
-                    />
-                    <Card.Body className="p-1" id="wd-course-card-body">
-                      <Card.Title
-                        className="wd-dashboard-course-title text-nowrap overflow-hidden"
-                        style={{ color: course.color }}
-                      >
-                        {" "}
-                        {course.name}
-                      </Card.Title>
-                      <Card.Text className="wd-dashboard-course-text text-nowrap overflow-hidden">
-                        {course.description}{" "}
-                      </Card.Text>
-                      <div className="text-start d-flex align-items-baseline justify-content-between">
-                        <Link to={`/Kambaz/Courses/${course._id}/Home`}>
-                          <LiaBookSolid
-                            color="#0A64A9"
-                            className="fs-3 text-dark"
-                          />
-                        </Link>
-                        <div>
-                          {/* Edit button copies the course to be edited into the form to edit the course
-                          Prevents default to navigate to Course screen */}
-                          <button
-                            id="wd-edit-course-click"
-                            onClick={(event) => {
-                              event.preventDefault();
-                              setCourse(course);
-                              setIsEditing(true);
-                            }}
-                            className="btn me-2 p-0"
-                            aria-label="Edit Course"
-                            style={{ background: "none", border: "none" }}
-                          >
-                            <PiNotePencilLight size={24} color="green" />
-                          </button>
+            {courses
+              .filter((course) =>
+                enrollments.some(
+                  (enrollment) =>
+                    enrollment.user === currentUser._id &&
+                    enrollment.course === course._id
+                )
+              )
 
-                          {/* Delete button invokes deleteCourse when clicked, passing the course's ID 
+              .map((course) => (
+                <Col className="wd-dashboard-course">
+                  <Card id="wd-course-card">
+                    <Link
+                      to={`/Kambaz/Courses/${course._id}/Home`}
+                      className="wd-dashboard-course-link text-decoration-none text-dark"
+                    >
+                      {/* dynamically renders course image from database */}
+                      <Card.Img
+                        variant="top"
+                        src={course.image}
+                        id="wd-course-img"
+                      />
+                      <Card.Body className="p-1" id="wd-course-card-body">
+                        <Card.Title
+                          className="wd-dashboard-course-title text-nowrap overflow-hidden"
+                          style={{ color: course.color }}
+                        >
+                          {" "}
+                          {course.name}
+                        </Card.Title>
+                        <Card.Text className="wd-dashboard-course-text text-nowrap overflow-hidden">
+                          {course.description}{" "}
+                        </Card.Text>
+                        <div className="text-start d-flex align-items-baseline justify-content-between">
+                          <Link to={`/Kambaz/Courses/${course._id}/Home`}>
+                            <LiaBookSolid
+                              color="#0A64A9"
+                              className="fs-3 text-dark"
+                            />
+                          </Link>
+                          <div>
+                            {/* Edit button copies the course to be edited into the form to edit the course
+                          Prevents default to navigate to Course screen */}
+                            <button
+                              id="wd-edit-course-click"
+                              onClick={(event) => {
+                                event.preventDefault();
+                                setCourse(course);
+                                setIsEditing(true);
+                              }}
+                              className="btn me-2 p-0"
+                              aria-label="Edit Course"
+                              style={{ background: "none", border: "none" }}
+                            >
+                              <PiNotePencilLight size={24} color="green" />
+                            </button>
+
+                            {/* Delete button invokes deleteCourse when clicked, passing the course's ID 
                           and preventing the Link's default behavior to navigate to Course Screen */}
-                          <button
-                            onClick={(event) => {
-                              event.preventDefault();
-                              deleteCourse(course._id);
-                            }}
-                            className="btn me-2 p-0"
-                            id="wd-delete-course-click"
-                            aria-label="Delete Course"
-                            style={{ background: "none", border: "none" }}
-                          >
-                            <FiTrash size={20} color="#C61717" />
-                          </button>
+                            <button
+                              onClick={(event) => {
+                                event.preventDefault();
+                                deleteCourse(course._id);
+                              }}
+                              className="btn me-2 p-0"
+                              id="wd-delete-course-click"
+                              aria-label="Delete Course"
+                              style={{ background: "none", border: "none" }}
+                            >
+                              <FiTrash size={20} color="#C61717" />
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </Card.Body>
-                  </Link>
-                </Card>
-              </Col>
-            ))}
+                      </Card.Body>
+                    </Link>
+                  </Card>
+                </Col>
+              ))}
           </Row>
         </div>
       </div>
