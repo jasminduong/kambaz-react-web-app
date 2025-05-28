@@ -5,9 +5,10 @@ import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 import store from "./Kambaz/store";
 import { Provider } from "react-redux";
 
+{/* Provider provides store to the whole application */}
 export default function App() {
   return (
-    <Provider store={store}>
+    <Provider store={store}> 
       <HashRouter>
         <div>
           <Routes>

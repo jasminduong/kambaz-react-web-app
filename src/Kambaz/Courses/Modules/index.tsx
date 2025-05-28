@@ -18,7 +18,8 @@ export default function Modules() {
   // moduleName state variable keeps track of the module name edited in the ModuleEditor dialog
   const [moduleName, setModuleName] = useState("");
 
-  // retrieve modules state variables get dispatch to call reducer functions
+  // retrieve modules state variables from reducer 
+  // get dispatch to call reducer functions
   const { modules } = useSelector((state: any) => state.modulesReducer);
   const dispatch = useDispatch();
 

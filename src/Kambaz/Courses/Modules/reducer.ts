@@ -2,17 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import { modules } from "../../Database";
 import { v4 as uuidv4 } from "uuid";
 
+/* Reducer holds all data points available globally */
+/* Used for when there are multiple screens, each with their own set of state variables that change over time */
 // create reducer's initial state with default modules copied from database
 const initialState = {
   modules: modules,
 };
 
+// create slice -
 const modulesSlice = createSlice({
-  // create slice
   name: "modules", // name the slice
-  initialState, // set initial state
+  initialState, // set initial state data 
   reducers: {
-    // declare reducer functions
+    // declare reducer mutator functions 
     addModule: (state, { payload: module }) => {
       // new module is in action.payload
       const newModule: any = {
@@ -48,4 +50,3 @@ const modulesSlice = createSlice({
 export const { addModule, deleteModule, updateModule, editModule } =
   modulesSlice.actions; // export all reducer functions
 export default modulesSlice.reducer; // export reducer
-

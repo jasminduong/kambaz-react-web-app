@@ -1,11 +1,19 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import * as db from "../../Database";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { addAssignment } from "../Assignments/reducer";
+import { updateAssignment } from "../Assignments/reducer";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
-  const assignments = db.assignments;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const assignments = useSelector(
+    (state: any) => state.assignmentReducer.assignments
+  );
 
   type Assignment = {
     _id: string;
@@ -34,160 +42,189 @@ export default function AssignmentEditor() {
     return `${year}-${month}-${day}`;
   };
 
+  // state variables to set assignment fields
+  const [title, setTitle] = useState(
+    assignmentToEdit?.title || "New Assignment"
+  );
+  const [description, setDescription] = useState(
+    assignmentToEdit?.description || "New Assignment Description"
+  );
+  const [points, setPoints] = useState(assignmentToEdit?.points || 100);
+  const [availableDate, setAvailableDate] = useState(
+    formatDate(assignmentToEdit?.availableDate || new Date().toISOString())
+  );
+  const [dueDate, setDueDate] = useState(
+    formatDate(assignmentToEdit?.dueDate || new Date().toISOString())
+  );
+
+  const isNew = !assignmentToEdit;
+
+  // handleSave event handler that calls reducer function newAssignment
+  const handleSave = () => {
+    const assignmentPayload = {
+      _id: aid,
+      title,
+      description,
+      course: cid!,
+      module: "ASSIGNMENTS",
+      points,
+      availableDate,
+      dueDate,
+    };
+    if (isNew) {
+      dispatch(addAssignment(assignmentPayload));
+    } else {
+      dispatch(updateAssignment(assignmentPayload));
+    }
+    navigate(`/Kambaz/Courses/${cid}/Assignments`);
+  };
+
   return (
     <Container className="mt-4" id="wd-assignments-editor">
-      {assignmentToEdit && (
-        <Form>
-          <Form.Group className="mb-3">
-            <Form.Label>Assignment Name</Form.Label>
-            <Form.Control defaultValue={assignmentToEdit.title} />
-          </Form.Group>
+      <Form>
+        <Form.Group className="mb-3">
+          <Form.Label>Assignment Name</Form.Label>
+          <Form.Control
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </Form.Group>
 
-          <Form.Group className="mb-4">
-            <Form.Label>Description</Form.Label>
+        <Form.Group className="mb-4">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={6}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </Form.Group>
+
+        <Row className="mb-3">
+          <Col md={3}>
+            <Form.Label>Points</Form.Label>
+          </Col>
+          <Col>
             <Form.Control
-              as="textarea"
-              rows={6}
-              defaultValue={assignmentToEdit.description}
+              type="number"
+              value={points}
+              onChange={(e) => setPoints(Number(e.target.value))}
             />
-          </Form.Group>
+          </Col>
+        </Row>
 
-          <Row className="mb-3">
-            <Col md={3}>
-              <Form.Label>Points</Form.Label>
-            </Col>
-            <Col>
-              <Form.Control
-                type="number"
-                defaultValue={assignmentToEdit.points}
-              />
-            </Col>
-          </Row>
+        <Row className="mb-3">
+          <Col md={3}>
+            <Form.Label>Assignment Group</Form.Label>
+          </Col>
+          <Col>
+            <Form.Select value="ASSIGNMENTS" style={{ fontSize: "13px" }}>
+              <option value="ASSIGNMENTS">ASSIGNMENTS</option>
+            </Form.Select>
+          </Col>
+        </Row>
 
-          <Row className="mb-3">
-            <Col md={3}>
-              <Form.Label>Assignment Group</Form.Label>
-            </Col>
-            <Col>
-              <Form.Select
-                defaultValue="ASSIGNMENTS"
-                style={{ fontSize: "13px" }}
-              >
-                <option value="ASSIGNMENTS">ASSIGNMENTS</option>
-              </Form.Select>
-            </Col>
-          </Row>
+        <Row className="mb-3">
+          <Col md={3}>
+            <Form.Label>Display Grade as</Form.Label>
+          </Col>
+          <Col>
+            <Form.Select value="Percentage" style={{ fontSize: "14px" }}>
+              <option value="Percentage">Percentage</option>
+            </Form.Select>
+          </Col>
+        </Row>
 
-          <Row className="mb-3">
-            <Col md={3}>
-              <Form.Label>Display Grade as</Form.Label>
-            </Col>
-            <Col>
-              <Form.Select
-                defaultValue="Percentage"
-                style={{ fontSize: "14px" }}
-              >
-                <option value="Percentage">Percentage</option>
-              </Form.Select>
-            </Col>
-          </Row>
+        <Row className="mb-3">
+          <Col md={3}>
+            <Form.Label>Submission Type</Form.Label>
+          </Col>
+          <Col>
+            <Row className="mb-3">
+              <Col md={{ span: 12 }}>
+                <div className="border p-3 rounded">
+                  <Form.Select
+                    value="Online"
+                    className="mb-3"
+                    style={{ fontSize: "14px" }}
+                  >
+                    <option value="Online">Online</option>
+                  </Form.Select>
 
-          <Row className="mb-3">
-            <Col md={3}>
-              <Form.Label>Submission Type</Form.Label>
-            </Col>
-            <Col>
-              <Row className="mb-3">
-                <Col md={{ span: 12 }}>
-                  <div className="border p-3 rounded">
-                    <Form.Select
-                      defaultValue="Online"
-                      className="mb-3"
-                      style={{ fontSize: "14px" }}
-                    >
-                      <option value="Online">Online</option>
-                    </Form.Select>
+                  <Form.Label>
+                    <strong>Online Entry Options</strong>
+                  </Form.Label>
+                  <Form.Check label="Text Entry" />
+                  <Form.Check label="Website URL" />
+                  <Form.Check label="Media Recordings" />
+                  <Form.Check label="Student Annotation" />
+                  <Form.Check label="File Uploads" />
+                </div>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
 
-                    <Form.Label>
-                      <strong>Online Entry Options</strong>
-                    </Form.Label>
-                    <Form.Check label="Text Entry" />
-                    <Form.Check label="Website URL" />
-                    <Form.Check label="Media Recordings" />
-                    <Form.Check label="Student Annotation" />
-                    <Form.Check label="File Uploads" />
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
+        <Row className="mb-3">
+          <Col md={3}>
+            <Form.Label>Assign</Form.Label>
+          </Col>
+          <Col>
+            <Row className="mb-3">
+              <Col md={{ span: 12 }}>
+                <div className="border p-3 rounded">
+                  <Form.Label>
+                    <strong>Assign to</strong>
+                  </Form.Label>
+                  <Form.Control defaultValue="Everyone" className="mb-3" />
+                  <Form.Label>
+                    <strong>Due</strong>
+                  </Form.Label>
+                  <Form.Control
+                    type="date"
+                    defaultValue={formatDate(dueDate)}
+                    onChange={(e) => setDueDate(e.target.value)}
+                    className="mb-3"
+                  />
+                  <Row>
+                    <Col>
+                      <Form.Label>
+                        <strong>Available from</strong>
+                      </Form.Label>
+                      <Form.Control
+                        type="date"
+                        defaultValue={formatDate(availableDate)}
+                        onChange={(e) => setAvailableDate(e.target.value)}
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Label>
+                        <strong>Until</strong>
+                      </Form.Label>
+                      <Form.Control
+                        type="date"
+                        defaultValue={formatDate(dueDate)}
+                        onChange={(e) => setDueDate(e.target.value)}
+                      />
+                    </Col>
+                  </Row>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
 
-          <Row className="mb-3">
-            <Col md={3}>
-              <Form.Label>Assign</Form.Label>
-            </Col>
-            <Col>
-              <Row className="mb-3">
-                <Col md={{ span: 12 }}>
-                  <div className="border p-3 rounded">
-                    <Form.Label>
-                      <strong>Assign to</strong>
-                    </Form.Label>
-                    <Form.Control defaultValue="Everyone" className="mb-3" />
-                    <Form.Label>
-                      <strong>Due</strong>
-                    </Form.Label>
-                    <Form.Control
-                      type="date"
-                      defaultValue={formatDate(assignmentToEdit.dueDate)}
-                      className="mb-3"
-                    />
-                    <Row>
-                      <Col>
-                        <Form.Label>
-                          <strong>Available from</strong>
-                        </Form.Label>
-                        <Form.Control
-                          type="date"
-                          defaultValue={formatDate(
-                            assignmentToEdit.availableDate
-                          )}
-                        />
-                      </Col>
-                      <Col>
-                        <Form.Label>
-                          <strong>Until</strong>
-                        </Form.Label>
-                        <Form.Control
-                          type="date"
-                          defaultValue={formatDate(assignmentToEdit.dueDate)}
-                        />
-                      </Col>
-                    </Row>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-
-          <div className="d-flex justify-content-end mt-4">
-            <Link to={`/Kambaz/Courses/${assignmentToEdit.course}/Assignments`}>
-              <Button
-                variant="secondary"
-                size="sm"
-                className="me-2 bg-gray-fill"
-              >
-                Cancel
-              </Button>
-            </Link>
-            <Link to={`/Kambaz/Courses/${assignmentToEdit.course}/Assignments`}>
-              <Button variant="danger" size="sm">
-                Save
-              </Button>
-            </Link>
-          </div>
-        </Form>
-      )}
+        <div className="d-flex justify-content-end mt-4">
+          <Link to={`/Kambaz/Courses/${cid}/Assignments`}>
+            <Button variant="secondary" size="sm" className="me-2 bg-gray-fill">
+              Cancel
+            </Button>
+          </Link>
+          <Button variant="danger" size="sm" onClick={handleSave}>
+            Save
+          </Button>
+        </div>
+      </Form>
     </Container>
   );
 }
