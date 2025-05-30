@@ -6,15 +6,18 @@ import { PiNotePencilLight } from "react-icons/pi";
 import IndAssignmentControlButtons from "./IndAssignmentControlButtons";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
-import * as db from "../../Database";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
   {
     /* retrieves course ID from the URL */
   }
   const { cid } = useParams();
-  const assignments = db.assignments;
+  const dispatch = useDispatch();
+  const assignments = useSelector(
+    (state: any) => state.assignmentReducer.assignments
+  );
 
   const { currentUser } = useSelector((state: any) => state.accountReducer);
 
@@ -59,20 +62,20 @@ export default function Assignments() {
                         </div>
 
                         <div className="text-muted small mt-1">
-                          <span className="text-danger">
-                            {assignment.module}
-                          </span>{" "}
-                          | <strong>Not available until</strong>{" "}
-                          {assignment.availableDate} |
-                          <br />
-                          <strong>Due</strong> {assignment.dueDate} |{" "}
-                          {assignment.points}pts
+                          <strong>Not available until</strong>{" "}
+                          {assignment.availableDate} | <strong>Due</strong>{" "}
+                          {assignment.dueDate} | {assignment.points}pts
                         </div>
                       </div>
                     </div>
 
                     <div className="mt-1">
-                      <IndAssignmentControlButtons />
+                      <IndAssignmentControlButtons
+                        assignmentId={assignment._id}
+                        deleteAssignment={(assignmentId) => {
+                          dispatch(deleteAssignment(assignmentId));
+                        }}
+                      />
                     </div>
                   </div>
                 </ListGroup.Item>

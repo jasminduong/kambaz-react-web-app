@@ -6,6 +6,7 @@ import { addAssignment } from "../Assignments/reducer";
 import { updateAssignment } from "../Assignments/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
@@ -31,16 +32,15 @@ export default function AssignmentEditor() {
       assignment.course === cid && assignment._id === aid
   );
 
-  const formatDate = (dateStr: string): string => {
-    const cleanDate = dateStr.split(" at ")[0] + " " + new Date().getFullYear();
-    const parsedDate = new Date(cleanDate);
-
-    const year = parsedDate.getFullYear();
-    const month = String(parsedDate.getMonth() + 1).padStart(2, "0");
-    const day = String(parsedDate.getDate()).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
+  const formatDate = (dateStr?: string): string => {
+    if (!dateStr) return new Date().toISOString().slice(0, 10); 
+    const parsedDate = new Date(dateStr);
+    if (isNaN(parsedDate.getTime())) {
+      return new Date().toISOString().slice(0, 10); 
+    }
+    return parsedDate.toISOString().slice(0, 10); 
   };
+  
 
   // state variables to set assignment fields
   const [title, setTitle] = useState(
@@ -62,7 +62,7 @@ export default function AssignmentEditor() {
   // handleSave event handler that calls reducer function newAssignment
   const handleSave = () => {
     const assignmentPayload = {
-      _id: aid,
+      _id: isNew ? uuidv4() : aid,
       title,
       description,
       course: cid!,
@@ -182,7 +182,7 @@ export default function AssignmentEditor() {
                   </Form.Label>
                   <Form.Control
                     type="date"
-                    defaultValue={formatDate(dueDate)}
+                    defaultValue={dueDate}
                     onChange={(e) => setDueDate(e.target.value)}
                     className="mb-3"
                   />
@@ -193,7 +193,7 @@ export default function AssignmentEditor() {
                       </Form.Label>
                       <Form.Control
                         type="date"
-                        defaultValue={formatDate(availableDate)}
+                        defaultValue={availableDate}
                         onChange={(e) => setAvailableDate(e.target.value)}
                       />
                     </Col>
@@ -203,7 +203,7 @@ export default function AssignmentEditor() {
                       </Form.Label>
                       <Form.Control
                         type="date"
-                        defaultValue={formatDate(dueDate)}
+                        defaultValue={dueDate}
                         onChange={(e) => setDueDate(e.target.value)}
                       />
                     </Col>

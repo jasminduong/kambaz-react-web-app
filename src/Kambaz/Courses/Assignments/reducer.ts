@@ -23,7 +23,7 @@ const assignmentsSlice = createSlice({
     updateAssignment: (state, { payload: assignment }) => {
       // assignment to update is in action.payload
       state.assignments = state.assignments.map(
-        (m: any) => (m._id === assignment._id ? assignment : m)
+        (a: any) => (a._id === assignment._id ? assignment : a)
         // replace assignments whose ID matches action.payload._id
       );
     },
