@@ -1,16 +1,17 @@
 import { useState } from "react";
+
 export default function ArrayStateVariable() {
-    {/* declare array state */}
+  // declare array state
   const [array, setArray] = useState([1, 2, 3, 4, 5]);
 
-  {/* event handler appends random number at end of array */}
+  // event handler appends random number at end of array
   const addElement = () => {
     setArray([...array, Math.floor(Math.random() * 100)]);
   };
 
-  {/* event handler removes element by index */}
+  // event handler removes element by index
   const deleteElement = (index: number) => {
-    setArray(array.filter((item, i) => i !== index));
+    setArray(array.filter((_item, i) => i !== index));
   };
 
   return (
@@ -20,10 +21,8 @@ export default function ArrayStateVariable() {
       <button onClick={addElement}>Add Element</button>
       <ul>
         {/* iterate over array elements */}
-        {/* render item's value button to delete element by its index */}
         {array.map((item, index) => (
           <li key={index}>
-            {" "}
             {item}
             <button onClick={() => deleteElement(index)}>Delete</button>
           </li>
