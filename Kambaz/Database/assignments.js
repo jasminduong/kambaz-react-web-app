@@ -1,4 +1,4 @@
-[
+export default [
   {
     "_id": "CS5610-A1",
     "title": "A1 Prototyping the Kambaz React Application with HTML",

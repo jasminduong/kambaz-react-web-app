@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import * as db from "../../Database";
+import * as db from "../../../../Kambaz/Database";
 
 export default function PeopleTable() {
   const { cid } = useParams();
@@ -38,8 +38,12 @@ export default function PeopleTable() {
                 <td className="wd-login-id wd-people-info align-middle">
                   {user.loginId}
                 </td>
-                <td className="wd-section wd-people-info align-middle">{user.section}</td>
-                <td className="wd-role wd-people-info align-middle">{user.role}</td>
+                <td className="wd-section wd-people-info align-middle">
+                  {user.section}
+                </td>
+                <td className="wd-role wd-people-info align-middle">
+                  {user.role}
+                </td>
                 <td className="wd-last-activity wd-people-info align-middle">
                   {user.lastActivity}
                 </td>

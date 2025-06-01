@@ -4,6 +4,9 @@ let todos = [
   { id: 3, title: "Task 3", completed: false },
   { id: 4, title: "Task 4", completed: true },
 ];
+
+/* WorkingWithArrays defines SERVER-side functionality using Express
+handles requests and the actual data manipulation logic */
 export default function WorkingWithArrays(app) {
   app.get("/lab5/todos", (req, res) => {
     res.json(todos);

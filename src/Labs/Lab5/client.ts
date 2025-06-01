@@ -1,6 +1,8 @@
 import axios from "axios";
 const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
 
+/* CLIENT.ts defines client-side functions using Axios (sends HTTP requests to the server and handles responses) */
+
 export const fetchWelcomeMessage = async () => {
   // axios sends an asynchronous request to the server and then capture the response in the user interface,
   // without navigating to the URL, away from the current window

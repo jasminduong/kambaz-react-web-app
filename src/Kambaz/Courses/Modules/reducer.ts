@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { modules } from "../../Database";
+import { modules } from "../../../../Kambaz/Database";
 import { v4 as uuidv4 } from "uuid";
 
 /* Reducer holds all data points available globally */
@@ -12,9 +12,9 @@ const initialState = {
 // create slice -
 const modulesSlice = createSlice({
   name: "modules", // name the slice
-  initialState, // set initial state data 
+  initialState, // set initial state data
   reducers: {
-    // declare reducer mutator functions 
+    // declare reducer mutator functions
     addModule: (state, { payload: module }) => {
       // new module is in action.payload
       const newModule: any = {

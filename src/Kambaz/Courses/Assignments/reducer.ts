@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { assignments } from "../../Database";
+import { assignments } from "../../../../Kambaz/Database";
 
 // create reducer's initial state with default assignments copied from database
 const initialState = {

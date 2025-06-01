@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { enrollments } from "../Database";
+import { enrollments } from "../../../Kambaz/Database";
 
 const initialState = {
   enrollments: enrollments,
