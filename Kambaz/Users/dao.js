@@ -1,8 +1,9 @@
 import db from "../Database/index.js";
 import { v4 as uuidv4 } from "uuid";
 
-/* Data Access Object (DAO) design pattern organizes data access by grouping it based on data types or collections
- implements various CRUD operations for handling the users array in the Database */
+/* Data Access Object (DAO) design pattern organizes data access by grouping it based on data types */
+// Users dao.js implements various CRUD operations for handling the users array in the Database
+
 let { users } = db;
 
 // used for sign up operation

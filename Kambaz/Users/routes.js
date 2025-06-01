@@ -4,7 +4,7 @@ import * as dao from "./dao.js";
 by transforming a stream of bits from a network connection request into a set of objects, maps, and 
 function event handlers that are part of the client/server architecture in a multi-tiered application */
 
-// routes expose the database operations through a RESTful API
+// UserRoutes expose the database operations of users through a RESTful API
 export default function UserRoutes(app) {
   const createUser = (req, res) => {};
   const deleteUser = (req, res) => {};
@@ -17,7 +17,7 @@ export default function UserRoutes(app) {
   app.put("/api/users/:userId", updateUser);
   app.delete("/api/users/:userId", deleteUser);
 
-  // SIGNUP
+  // SIGNUP - creates new user
   const signup = (req, res) => {
     const user = dao.findUserByUsername(req.body.username); // checks if a user with that username already exists
     if (user) {
@@ -30,7 +30,7 @@ export default function UserRoutes(app) {
   };
   app.post("/api/users/signup", signup);
 
-  // SIGNIN
+  // SIGNIN - logs in the user if credentials match
   const signin = (req, res) => {
     const { username, password } = req.body; // extracts properties username and password from the request's body
     const currentUser = dao.findUserByCredentials(username, password); // and passess them to the findUserByCredentials function implemented by the DAO
@@ -44,9 +44,11 @@ export default function UserRoutes(app) {
   app.post("/api/users/signin", signin);
 
   // PROFILE
-  const profile = async (req, res) => { // if a user has already signed in, 
+  const profile = async (req, res) => {
+    // if a user has already signed in,
     const currentUser = req.session["currentUser"]; // the currentUser can be retrieved from the session
-    if (!currentUser) { // if there is no currentUser,
+    if (!currentUser) {
+      // if there is no currentUser,
       res.sendStatus(401); // an error is returned
       return;
     }
@@ -54,18 +56,17 @@ export default function UserRoutes(app) {
   };
   app.post("/api/users/profile", profile);
 
-  // UPDATE
+  // UPDATE - updates current user's profile
   const updateUser = (req, res) => {
     const userId = req.params.userId; // accepts a user's primary key (id) as a path parameter
     const userUpdates = req.body;
     dao.updateUser(userId, userUpdates); // passes in user id and request body
-    const currentUser = dao.findUserById(userId); // if a user updates their profile, 
+    const currentUser = dao.findUserById(userId); // if a user updates their profile,
     req.session["currentUser"] = currentUser; // then the session is kept in synch
     res.json(currentUser); // responds with status
   };
 
-  // SIGN OUT
-  // signout resets the currentUser to null in the server
+  // SIGN OUT - resets the currentUser to null in the server
   const signout = (req, res) => {
     req.session.destroy(); // destroys the session
     currentUser = null;
@@ -73,3 +74,19 @@ export default function UserRoutes(app) {
   };
   app.post("/api/users/signout", signout);
 }
+
+// gets the courses the current user is enrolled in 
+const findCoursesForEnrolledUser = (req, res) => {
+  let { userId } = req.params;
+  if (userId === "current") {
+    const currentUser = req.session["currentUser"];
+    if (!currentUser) {
+      res.sendStatus(401);
+      return;
+    }
+    userId = currentUser._id;
+  }
+  const courses = courseDao.findCoursesForEnrolledUser(userId);
+  res.json(courses);
+};
+app.get("/api/users/:userId/courses", findCoursesForEnrolledUser);

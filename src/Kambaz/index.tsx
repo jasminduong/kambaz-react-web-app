@@ -4,14 +4,29 @@ import Dashboard from "./Dashboard";
 import KambazNavigation from "./Navigation";
 import Courses from "./Courses";
 import "./styles.css";
-import * as db from "../../Kambaz/Database";
 import ProtectedRoute from "./Account/ProtectedRoute";
 import EnrolledCourseRoute from "./Enrollments/ProtectedRoute";
 import Session from "./Account/Session";
+import * as userClient from "./Account/client";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 /* Main Kambaz layout and route definitions for all subpages (account, dashboard, courses, calendar, inbox) */
 export default function Kambaz() {
-  const courses = db.courses;
+  const [courses, setCourses] = useState<any[]>([]);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
+  const fetchCourses = async () => {
+    try {
+      const courses = await userClient.findMyCourses(); // fetches courses from client 
+      setCourses(courses); // sets courses
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, [currentUser]);
 
   return (
     <Session>

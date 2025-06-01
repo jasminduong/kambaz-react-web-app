@@ -3,8 +3,8 @@ export const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
 export const USERS_API = `${REMOTE_SERVER}/api/users`;
 const axiosWithCredentials = axios.create({ withCredentials: true }); // creates an instance of the library that includes cookies for credentials
 
-/* defines client side functions using Axios
-integrates with the user routes implemented in the server */
+/* defines client side functions using Axios */
+// Account client.ts integrates with the user routes implemented in the server 
 
 // signin posts a credentials object containing the username and password expected by the server
 // if the credentials are found, the response should contain the logged in user
@@ -36,3 +36,10 @@ export const signout = async () => {
   const response = await axiosWithCredentials.post(`${USERS_API}/signout`);
   return response.data;
 };
+
+// findMyCourses retrieves only the current user's courses
+export const findMyCourses = async () => {
+  const { data } = await axiosWithCredentials.get(`${USERS_API}/current/courses`);
+  return data;
+};
+

@@ -4,9 +4,11 @@ import Lab5 from "./Lab5/index.js";
 import cors from "cors";
 import UserRoutes from "./Kambaz/Users/routes.js";
 import "dotenv/config";
+import CourseRoutes from "./Kambaz/Courses/routes.js";
 
 const app = express();
 UserRoutes(app);
+CourseRoutes(app);
 app.use(
   cors({
     // governs the policies and mechanisms of how various resources can be shared across different domains or origins
