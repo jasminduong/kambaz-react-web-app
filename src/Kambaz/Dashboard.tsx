@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, Col, FormControl, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { PiNotePencilLight } from "react-icons/pi";
@@ -13,6 +13,8 @@ import {
   setCourse,
 } from "./Courses/reducer";
 import { enrollUser, unenrollUser } from "./Enrollments/reducer";
+import * as client from "./Account/client";
+import * as coursesClient from "./Courses/client";
 
 interface Course {
   _id: string;
@@ -43,15 +45,24 @@ export default function Dashboard() {
     (state: any) => state.enrollmentsReducer.enrollments
   );
 
-  const handleAddCourse = () => {
+  const fetchCourses = async () => {
+    const allCourses = await coursesClient.fetchAllCourses();
+    dispatch(setCourse(allCourses));
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  const handleAddCourse = async () => {
     const newCourse: Course = {
       ...course,
       _id: uuidv4(),
       image: course.image || "/images/reactjs.png",
       color: course.color || "#0A64A9",
     };
+    const createdCourse = await client.createCourse(newCourse);
 
-    dispatch(addCourse(newCourse));
+    dispatch(addCourse(createdCourse));
 
     dispatch(
       enrollUser({
@@ -65,13 +76,15 @@ export default function Dashboard() {
     setIsEditing(false);
   };
 
-  const handleUpdateCourse = () => {
-    dispatch(updateCourse(course));
+  const handleUpdateCourse = async () => {
+    const updatedCourse = await coursesClient.updateCourse(course);
+    dispatch(updateCourse(updatedCourse));
     setIsEditing(false);
   };
 
-  const handleDeleteCourse = (courseId: string) => {
-    dispatch(deleteCourse(courseId));
+  const handleDeleteCourse = async (courseId: string) => {
+    const deletedCourse = await coursesClient.deleteCourse(courseId);
+    dispatch(deleteCourse(deletedCourse));
     dispatch(
       unenrollUser({
         user: currentUser._id,

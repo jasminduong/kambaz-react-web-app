@@ -43,3 +43,11 @@ export const findMyCourses = async () => {
   return data;
 };
 
+// createCourse posts a new course to the server 
+// and returns the response's data which should be the brand new course created in the server
+export const createCourse = async (course: any) => {
+  const { data } = await axiosWithCredentials.post(`${USERS_API}/current/courses`, course);
+  return data;
+};
+
+

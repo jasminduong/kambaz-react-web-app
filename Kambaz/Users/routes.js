@@ -1,4 +1,5 @@
 import * as dao from "./dao.js";
+import * as enrollmentsDao from "../Enrollments/dao.js";
 
 /* routes create an interface between the HTTP network layer and the JavaScript object and function layer 
 by transforming a stream of bits from a network connection request into a set of objects, maps, and 
@@ -75,7 +76,7 @@ export default function UserRoutes(app) {
   app.post("/api/users/signout", signout);
 }
 
-// gets the courses the current user is enrolled in 
+// gets the courses the current user is enrolled in
 const findCoursesForEnrolledUser = (req, res) => {
   let { userId } = req.params;
   if (userId === "current") {
@@ -90,3 +91,12 @@ const findCoursesForEnrolledUser = (req, res) => {
   res.json(courses);
 };
 app.get("/api/users/:userId/courses", findCoursesForEnrolledUser);
+
+// enrolls the current user in the new course
+const createCourse = (req, res) => {
+  const currentUser = req.session["currentUser"];
+  const newCourse = courseDao.createCourse(req.body);
+  enrollmentsDao.enrollUserInCourse(currentUser._id, newCourse._id);
+  res.json(newCourse);
+};
+app.post("/api/users/current/courses", createCourse);
