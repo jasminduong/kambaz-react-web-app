@@ -1,18 +1,14 @@
 import express from "express";
+import session from "express-session";
 import Hello from "./Hello.js";
 import Lab5 from "./Lab5/index.js";
 import cors from "cors";
 import UserRoutes from "./Kambaz/Users/routes.js";
 import "dotenv/config";
 import CourseRoutes from "./Kambaz/Courses/routes.js";
-import EnrollmentRoutes from "./Kambaz/Enrollments/routes.js";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
 
 const app = express();
-UserRoutes(app);
-CourseRoutes(app);
-EnrollmentRoutes(app);
-ModuleRoutes(app);
 app.use(
   cors({
     // governs the policies and mechanisms of how various resources can be shared across different domains or origins
@@ -37,6 +33,11 @@ if (process.env.NODE_ENV !== "development") {
 app.use(session(sessionOptions));
 
 app.use(express.json()); // encoding the data as JSON in the HTTP request body allows for arbitrarily large amounts of data and secure data encryption
+
+UserRoutes(app);
+CourseRoutes(app);
+ModuleRoutes(app);
+
 Lab5(app); // pass reference to express module
 Hello(app);
 app.listen(process.env.PORT || 4000);

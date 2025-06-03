@@ -13,7 +13,7 @@ export default function Signin() {
   // clicking the Sign in button posts the credentials to the server using the client.signin function
   // when the server responds successfully, the currently logged in user is stored in the user reducer and navigate to the Profile screen
   const signin = async () => {
-    const user = await client.signin(credentials); //  fetches signin credentials from client
+    const user = await client.signin(credentials); // fetches signin credentials from client
     if (!user) return;
     dispatch(setCurrentUser(user));
     navigate("/Kambaz/Dashboard");

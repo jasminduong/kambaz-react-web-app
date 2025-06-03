@@ -160,7 +160,11 @@ export default function Dashboard() {
         </>
       )}
 
-      <h6 id="wd-dashboard-published">Published Courses ({courses.length})</h6>
+      <h6 id="wd-dashboard-published">
+        {showAllCourses
+          ? `Published Courses (${courses.length})`
+          : `Enrolled Courses (${filteredCourses.length})`}
+      </h6>
       <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} md={2} lg={4} className="g-30" id="wd-courses-row">

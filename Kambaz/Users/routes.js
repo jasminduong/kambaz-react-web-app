@@ -1,5 +1,6 @@
 import * as dao from "./dao.js";
 import * as enrollmentsDao from "../Enrollments/dao.js";
+import * as courseDao from "../Courses/dao.js";
 
 /* routes create an interface between the HTTP network layer and the JavaScript object and function layer 
 by transforming a stream of bits from a network connection request into a set of objects, maps, and 
@@ -15,7 +16,6 @@ export default function UserRoutes(app) {
   app.post("/api/users", createUser);
   app.get("/api/users", findAllUsers);
   app.get("/api/users/:userId", findUserById);
-  app.put("/api/users/:userId", updateUser);
   app.delete("/api/users/:userId", deleteUser);
 
   // SIGNUP - creates new user
@@ -66,37 +66,51 @@ export default function UserRoutes(app) {
     req.session["currentUser"] = currentUser; // then the session is kept in synch
     res.json(currentUser); // responds with status
   };
+  app.put("/api/users/:userId", updateUser);
 
   // SIGN OUT - resets the currentUser to null in the server
   const signout = (req, res) => {
-    req.session.destroy(); // destroys the session
-    currentUser = null;
-    res.sendStatus(200);
+    if (!req.session) {
+      return res.sendStatus(200);
+    }
+
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err);
+        return res.status(500).send("Error signing out");
+      }
+      res.clearCookie("connect.sid"); // clears session cookie
+      res.sendStatus(200);
+    });
   };
   app.post("/api/users/signout", signout);
-}
 
-// gets the courses the current user is enrolled in
-const findCoursesForEnrolledUser = (req, res) => {
-  let { userId } = req.params;
-  if (userId === "current") {
+  // gets the courses the current user is enrolled in
+  const findCoursesForEnrolledUser = (req, res) => {
+    let { userId } = req.params;
+    if (userId === "current") {
+      const currentUser = req.session["currentUser"];
+      if (!currentUser) {
+        res.sendStatus(401);
+        return;
+      }
+      userId = currentUser._id;
+    }
+    const courses = courseDao.findCoursesForEnrolledUser(userId);
+    res.json(courses);
+  };
+  app.get("/api/users/:userId/courses", findCoursesForEnrolledUser);
+
+  // enrolls the current user in the new course
+  const createCourse = (req, res) => {
     const currentUser = req.session["currentUser"];
     if (!currentUser) {
-      res.sendStatus(401);
-      return;
+      return res.status(401).json({ message: "Not logged in" });
     }
-    userId = currentUser._id;
-  }
-  const courses = courseDao.findCoursesForEnrolledUser(userId);
-  res.json(courses);
-};
-app.get("/api/users/:userId/courses", findCoursesForEnrolledUser);
 
-// enrolls the current user in the new course
-const createCourse = (req, res) => {
-  const currentUser = req.session["currentUser"];
-  const newCourse = courseDao.createCourse(req.body);
-  enrollmentsDao.enrollUserInCourse(currentUser._id, newCourse._id);
-  res.json(newCourse);
-};
-app.post("/api/users/current/courses", createCourse);
+    const newCourse = courseDao.createCourse(req.body);
+    enrollmentsDao.enrollUserInCourse(currentUser._id, newCourse._id);
+    res.json(newCourse);
+  };
+  app.post("/api/users/current/courses", createCourse);
+}

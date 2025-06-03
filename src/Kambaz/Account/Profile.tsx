@@ -33,7 +33,6 @@ export default function Profile() {
     navigate("/Kambaz/Account/Signin");
   };
 
-
   // useEffect automatically run the fetchProfile() function when the Profile component first mounts (appears on the screen)
   useEffect(() => {
     fetchProfile();
@@ -99,6 +98,7 @@ export default function Profile() {
           />
 
           <Form.Select
+            value={profile.role || "USER"}
             onChange={(e) => setProfile({ ...profile, role: e.target.value })}
             className="form-control mb-2"
             id="wd-role"
@@ -113,6 +113,7 @@ export default function Profile() {
             <button
               onClick={updateProfile}
               className="btn btn-primary w-100 mb-2"
+              id="wd-update-btn"
             >
               {" "}
               Update{" "}

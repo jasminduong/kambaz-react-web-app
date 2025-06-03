@@ -1,4 +1,5 @@
 import Database from "../Database/index.js";
+import { v4 as uuidv4 } from "uuid";
 
 // Courses dao.js implements various CRUD operations for handling the courses array in the Database
 
