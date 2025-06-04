@@ -15,6 +15,7 @@ import {
 import { enrollUser, unenrollUser } from "./Enrollments/reducer";
 import * as client from "./Account/client";
 import * as coursesClient from "./Courses/client";
+import * as enrollmentsClient from "./Enrollments/client";
 
 interface Course {
   _id: string;
@@ -68,7 +69,7 @@ export default function Dashboard() {
       enrollUser({
         _id: uuidv4(),
         user: currentUser._id,
-        course: newCourse._id,
+        course: createdCourse._id,
       })
     );
 
@@ -104,6 +105,18 @@ export default function Dashboard() {
             enrollment.course === course._id
         )
       );
+
+  const fetchEnrollments = async () => {
+    if (currentUser?._id) {
+      const response = await enrollmentsClient.findEnrollmentsByUser(
+        currentUser._id
+      );
+      response.data.forEach((e: any) => dispatch(enrollUser(e)));
+    }
+  };
+  useEffect(() => {
+    fetchEnrollments();
+  }, []);
 
   return (
     <div id="wd-dashboard">
@@ -212,9 +225,13 @@ export default function Dashboard() {
                             className={`btn btn-sm ${
                               isEnrolled ? "btn-danger" : "btn-success"
                             }`}
-                            onClick={(e) => {
+                            onClick={ async (e) => {
                               e.preventDefault();
                               if (isEnrolled) {
+                                await enrollmentsClient.unenrollUser(
+                                  currentUser._id,
+                                  course._id
+                                );
                                 dispatch(
                                   unenrollUser({
                                     user: currentUser._id,
@@ -222,9 +239,13 @@ export default function Dashboard() {
                                   })
                                 );
                               } else {
+                                await enrollmentsClient.enrollUser(
+                                  currentUser._id,
+                                  course._id
+                                );
                                 dispatch(
                                   enrollUser({
-                                    _id: uuidv4(),
+                                    _id: uuidv4(), // This is only needed for Redux tracking
                                     user: currentUser._id,
                                     course: course._id,
                                   })

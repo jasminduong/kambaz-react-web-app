@@ -6,7 +6,8 @@ import { addAssignment } from "../Assignments/reducer";
 import { updateAssignment } from "../Assignments/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
@@ -33,14 +34,13 @@ export default function AssignmentEditor() {
   );
 
   const formatDate = (dateStr?: string): string => {
-    if (!dateStr) return new Date().toISOString().slice(0, 10); 
+    if (!dateStr) return new Date().toISOString().slice(0, 10);
     const parsedDate = new Date(dateStr);
     if (isNaN(parsedDate.getTime())) {
-      return new Date().toISOString().slice(0, 10); 
+      return new Date().toISOString().slice(0, 10);
     }
-    return parsedDate.toISOString().slice(0, 10); 
+    return parsedDate.toISOString().slice(0, 10);
   };
-  
 
   // state variables to set assignment fields
   const [title, setTitle] = useState(
@@ -60,21 +60,33 @@ export default function AssignmentEditor() {
   const isNew = !assignmentToEdit;
 
   // handleSave event handler that calls reducer function newAssignment
-  const handleSave = () => {
-    const assignmentPayload = {
-      _id: isNew ? uuidv4() : aid,
-      title,
-      description,
-      course: cid!,
-      module: "ASSIGNMENTS",
-      points,
-      availableDate,
-      dueDate,
-    };
+  const handleSave = async () => {
     if (isNew) {
-      dispatch(addAssignment(assignmentPayload));
+      const newAssignment = await coursesClient.createAssignmentForCourse(
+        cid!,
+        {
+          title,
+          description,
+          course: cid!,
+          module: "ASSIGNMENTS",
+          points,
+          availableDate,
+          dueDate,
+        }
+      );
+      dispatch(addAssignment(newAssignment));
     } else {
-      dispatch(updateAssignment(assignmentPayload));
+      const updatedAssignment = await assignmentsClient.updateAssignment({
+        _id: aid,
+        title,
+        description,
+        course: cid!,
+        module: "ASSIGNMENTS",
+        points,
+        availableDate,
+        dueDate,
+      });
+      dispatch(updateAssignment(updatedAssignment));
     }
     navigate(`/Kambaz/Courses/${cid}/Assignments`);
   };

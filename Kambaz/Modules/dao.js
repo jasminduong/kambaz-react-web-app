@@ -1,8 +1,9 @@
 import Database from "../Database/index.js";
+import { v4 as uuidv4 } from "uuid";
 
 // Modules dao.js implements various CRUD operations for handling the modules array in the Database
 
-// function to find a module by its id
+// function to find modules by its course id
 export function findModulesForCourse(courseId) {
   const { modules } = Database;
   return modules.filter((module) => module.course === courseId);

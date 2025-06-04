@@ -7,7 +7,10 @@ import IndAssignmentControlButtons from "./IndAssignmentControlButtons";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "./reducer";
+import { deleteAssignment, setAssignments } from "./reducer";
+import { useEffect } from "react";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
 
 export default function Assignments() {
   {
@@ -20,6 +23,22 @@ export default function Assignments() {
   );
 
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+
+  const fetchAssignments = async () => {
+    const assignments = await coursesClient.findAssignmentsForCourse(
+      cid as string
+    ); // fetches assignments from client
+    dispatch(setAssignments(assignments));
+  };
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
+  const removeAssignment = async (assignmentId: string) => {
+    console.log("Attempting to delete:", assignmentId);
+    await assignmentsClient.deleteAssignment(assignmentId); // fetches assignment to be removed from client
+    dispatch(deleteAssignment(assignmentId));
+  };
 
   return (
     <div id="wd-assignments">
@@ -72,9 +91,7 @@ export default function Assignments() {
                     <div className="mt-1">
                       <IndAssignmentControlButtons
                         assignmentId={assignment._id}
-                        deleteAssignment={(assignmentId) => {
-                          dispatch(deleteAssignment(assignmentId));
-                        }}
+                        deleteAssignment={(assignmentId) => removeAssignment(assignmentId)}
                       />
                     </div>
                   </div>

@@ -113,8 +113,8 @@ export default [
   },
   {
     "_id": "901",
-    "username": "patel.karena",
-    "password": "Northe@stern1204",
+    "username": "patel.kareena",
+    "password": "Northe@stern1202",
     "firstName": "Kareena",
     "lastName": "Patel",
     "email": "patel.karena@northeastern.edu",

@@ -7,6 +7,8 @@ import UserRoutes from "./Kambaz/Users/routes.js";
 import "dotenv/config";
 import CourseRoutes from "./Kambaz/Courses/routes.js";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
+import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
+import EnrollmentsRoutes from "./Kambaz/Enrollments/routes.js";
 
 const app = express();
 app.use(
@@ -37,6 +39,8 @@ app.use(express.json()); // encoding the data as JSON in the HTTP request body a
 UserRoutes(app);
 CourseRoutes(app);
 ModuleRoutes(app);
+AssignmentRoutes(app);
+EnrollmentsRoutes(app);
 
 Lab5(app); // pass reference to express module
 Hello(app);
