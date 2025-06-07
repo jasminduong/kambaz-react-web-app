@@ -7,11 +7,10 @@ import { FiTrash } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import {
-  addCourse,
   deleteCourse,
   updateCourse,
   setCourse,
-  setCourses
+  setCourses,
 } from "./Courses/reducer";
 import { enrollUser, unenrollUser } from "./Enrollments/reducer";
 import * as client from "./Account/client";
@@ -48,7 +47,7 @@ export default function Dashboard() {
   );
 
   const fetchCourses = async () => {
-    const allCourses = await coursesClient.fetchAllCourses();
+    const allCourses = await client.findMyCourses(); 
     dispatch(setCourses(allCourses));
   };
   useEffect(() => {
@@ -58,14 +57,11 @@ export default function Dashboard() {
   const handleAddCourse = async () => {
     const newCourse: Course = {
       ...course,
-      _id: uuidv4(),
       image: course.image || "/images/reactjs.png",
       color: course.color || "#0A64A9",
     };
     const createdCourse = await client.createCourse(newCourse);
-
-    dispatch(addCourse(createdCourse));
-
+    await fetchCourses();
     dispatch(
       enrollUser({
         _id: uuidv4(),
@@ -73,7 +69,6 @@ export default function Dashboard() {
         course: createdCourse._id,
       })
     );
-
     dispatch(setCourse(courseTemplate));
     setIsEditing(false);
   };
@@ -109,10 +104,10 @@ export default function Dashboard() {
 
   const fetchEnrollments = async () => {
     if (currentUser?._id) {
-      const response = await enrollmentsClient.findEnrollmentsByUser(
+      const enrollments = await enrollmentsClient.findEnrollmentsByUser(
         currentUser._id
       );
-      response.data.forEach((e: any) => dispatch(enrollUser(e)));
+      enrollments.forEach((e: any) => dispatch(enrollUser(e)));
     }
   };
   useEffect(() => {
@@ -226,7 +221,7 @@ export default function Dashboard() {
                             className={`btn btn-sm ${
                               isEnrolled ? "btn-danger" : "btn-success"
                             }`}
-                            onClick={ async (e) => {
+                            onClick={async (e) => {
                               e.preventDefault();
                               if (isEnrolled) {
                                 await enrollmentsClient.unenrollUser(

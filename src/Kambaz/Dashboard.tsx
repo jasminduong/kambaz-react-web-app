@@ -45,14 +45,19 @@ export default function Dashboard() {
   const enrollments = useSelector(
     (state: any) => state.enrollmentsReducer.enrollments
   );
+  const [showAllCourses, setShowAllCourses] = useState(false);
 
-  const fetchCourses = async () => {
-    const allCourses = await client.findMyCourses(); // fetches only enrolled courses
+  const fetchCourses = async (showAll: boolean) => {
+    const allCourses = showAll
+      ? await coursesClient.fetchAllCourses()
+      : await client.findMyCourses();
+  
     dispatch(setCourses(allCourses));
   };
+  
   useEffect(() => {
-    fetchCourses();
-  }, []);
+    fetchCourses(showAllCourses);
+  }, [showAllCourses]);
 
   const handleAddCourse = async () => {
     const newCourse: Course = {
@@ -61,8 +66,7 @@ export default function Dashboard() {
       color: course.color || "#0A64A9",
     };
     const createdCourse = await client.createCourse(newCourse);
-    // Don't manually add to Redux store; refetch instead
-    await fetchCourses();
+    await fetchCourses(showAllCourses);
     dispatch(
       enrollUser({
         _id: uuidv4(),
@@ -90,8 +94,6 @@ export default function Dashboard() {
       })
     );
   };
-
-  const [showAllCourses, setShowAllCourses] = useState(false);
 
   const filteredCourses = showAllCourses
     ? courses
@@ -235,6 +237,7 @@ export default function Dashboard() {
                                     course: course._id,
                                   })
                                 );
+                                fetchEnrollments();
                               } else {
                                 await enrollmentsClient.enrollUser(
                                   currentUser._id,
@@ -242,7 +245,7 @@ export default function Dashboard() {
                                 );
                                 dispatch(
                                   enrollUser({
-                                    _id: uuidv4(), // This is only needed for Redux tracking
+                                    _id: uuidv4(),
                                     user: currentUser._id,
                                     course: course._id,
                                   })
