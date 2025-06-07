@@ -11,6 +11,7 @@ import {
   deleteCourse,
   updateCourse,
   setCourse,
+  setCourses
 } from "./Courses/reducer";
 import { enrollUser, unenrollUser } from "./Enrollments/reducer";
 import * as client from "./Account/client";
@@ -48,7 +49,7 @@ export default function Dashboard() {
 
   const fetchCourses = async () => {
     const allCourses = await coursesClient.fetchAllCourses();
-    dispatch(setCourse(allCourses));
+    dispatch(setCourses(allCourses));
   };
   useEffect(() => {
     fetchCourses();
