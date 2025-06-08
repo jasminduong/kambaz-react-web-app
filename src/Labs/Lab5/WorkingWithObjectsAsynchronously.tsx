@@ -58,6 +58,8 @@ export default function WorkingWithObjectsAsynchronously() {
           Completed{" "}
         </label>
       </div>
+      <pre>{JSON.stringify(assignment, null, 2)}</pre>
+      <hr />
       <button
         className="btn btn-primary me-2"
         onClick={() => updateTitle(assignment.title)} // updates title, when refresh, title is changed
