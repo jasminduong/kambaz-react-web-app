@@ -75,11 +75,29 @@ export default function TOC() {
       </Nav.Item>
       <Nav.Item>
         <Nav.Link
-          href="https://github.com/jasminduong"
+          href="https://github.com/jasminduong/kambaz-react-web-app"
           target="_blank"
           rel="noopener noreferrer"
         >
-          My GitHub
+          GitHub (Front-end)
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          href="https://github.com/jasminduong/kambaz-node-server-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub (Back-end)
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          href="https://jasminduong-kambaz-node-server-app.onrender.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Render
         </Nav.Link>
       </Nav.Item>
     </Nav>
