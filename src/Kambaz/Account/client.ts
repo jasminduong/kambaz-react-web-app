@@ -79,3 +79,24 @@ export const findUsersByPartialName = async (name: string) => {
   return response.data;
 };
 
+// findUserById retrieves all users of the given id
+export const findUserById = async (id: string) => {
+  const response = await axios.get(`${USERS_API}/${id}`);
+  return response.data;
+};
+
+// deleteUser deletes the given user based on id
+export const deleteUser = async (userId: string) => {
+  const response = await axios.delete( `${USERS_API}/${userId}` );
+  return response.data;
+};
+
+// createUser creates a new user
+export const createUser = async (user: any) => {
+  const response = await axios.post(`${USERS_API}`, user);
+  return response.data;
+};
+
+
+
+
