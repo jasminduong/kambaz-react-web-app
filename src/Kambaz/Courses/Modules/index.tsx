@@ -54,7 +54,7 @@ export default function Modules() {
   };
 
   const saveModule = async (module: any) => {
-    await modulesClient.updateModule(module); // fetches udated module from client 
+    await modulesClient.updateModule(module); // fetches udated module from client
     dispatch(updateModule(module));
   };
 
@@ -62,12 +62,14 @@ export default function Modules() {
     <div>
       {/* setModuleName and addModule functions are passed to the ModulesControls component 
       which are passed to the ModuleEditor dialog */}
-      <ModulesControl
-        setModuleName={setModuleName}
-        moduleName={moduleName}
-        // wrap reducer functions with dispatch clear module name
-        addModule={createModuleForCourse}
-      />
+      {currentUser.role === "FACULTY" && (
+        <ModulesControl
+          setModuleName={setModuleName}
+          moduleName={moduleName}
+          // wrap reducer functions with dispatch clear module name
+          addModule={createModuleForCourse}
+        />
+      )}
       <br />
       <br />
       <ListGroup className="rounded-0" id="wd-modules">

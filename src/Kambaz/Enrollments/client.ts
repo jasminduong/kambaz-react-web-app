@@ -22,19 +22,13 @@ export const enrollUser = async (user: string, course: string) => {
 
 // deletes the user from a course
 export const unenrollUser = async (user: string, course: string) => {
-  console.log("=== CLIENT: Unenrolling user ===");
-  console.log("User ID:", user);
-  console.log("Course ID:", course);
-  console.log("DELETE URL:", `${ENROLLMENTS_API}/${user}/${course}`);
 
   try {
     const response = await axiosWithCredentials.delete(
       `${ENROLLMENTS_API}/${user}/${course}`
     );
-    console.log("Unenroll response:", response.data);
     return response.data;
   } catch (error) {
-    console.error("Client unenroll error:", error);
     throw error;
   }
 };

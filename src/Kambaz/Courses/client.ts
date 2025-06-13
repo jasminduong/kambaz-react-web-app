@@ -68,3 +68,18 @@ export const createAssignmentForCourse = async (
   );
   return response.data;
 };
+
+// finds users of a course
+export const findUsersForCourse = async (courseId: string) => {
+  console.log("=== CLIENT: Finding users for course ===");
+  console.log("Course ID:", courseId);
+  
+  try {
+    const response = await axiosWithCredentials.get(`${COURSES_API}/${courseId}/users`);
+    console.log("Users for course response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error finding users for course:", error);
+    throw error;
+  }
+};

@@ -10,8 +10,8 @@ import Modules from "./Modules";
 import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
-import PeopleTable from "./People/Table";
 import { FaAlignJustify } from "react-icons/fa";
+import People from "./People";
 
 /* Course page layout and route configuration for course tools (home, modules, assignments, assignment editor) */
 export default function Courses({ courses }: { courses: any[] }) {
@@ -56,7 +56,7 @@ export default function Courses({ courses }: { courses: any[] }) {
             <Route path="Zoom" element={<h2>Zoom</h2>} />
             <Route path="Quizzes" element={<h2>Quizzes</h2>} />
             <Route path="Grades" element={<h2>Grades</h2>} />
-            <Route path="People" element={<PeopleTable />} />
+            <Route path="People" element={<People />} />
           </Routes>
         </div>
       </div>

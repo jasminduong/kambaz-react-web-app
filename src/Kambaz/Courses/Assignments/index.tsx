@@ -42,14 +42,14 @@ export default function Assignments() {
 
   return (
     <div id="wd-assignments">
-      <AssignmentsControl />
+      {currentUser.role === "FACULTY" && <AssignmentsControl />}
       <br />
 
       <ListGroup className="rounded-0" id="wd-modules">
         <ListGroup.Item className="wd-module p-0 mb-5 fs-6 border-lesson-outline">
           <div className="wd-title p-3 ps-2 bg-gray-fill">
             <BsGripVertical className="me-2 fs-3" /> ASSIGNMENTS{" "}
-            <AssignmentControlButtons />
+            {currentUser.role === "FACULTY" && <AssignmentControlButtons />}
           </div>
           <ListGroup className="wd-lessons rounded-0">
             {assignments
@@ -88,12 +88,16 @@ export default function Assignments() {
                       </div>
                     </div>
 
-                    <div className="mt-1">
-                      <IndAssignmentControlButtons
-                        assignmentId={assignment._id}
-                        deleteAssignment={(assignmentId) => removeAssignment(assignmentId)}
-                      />
-                    </div>
+                    {currentUser.role === "FACULTY" && (
+                      <div className="mt-1">
+                        <IndAssignmentControlButtons
+                          assignmentId={assignment._id}
+                          deleteAssignment={(assignmentId) =>
+                            removeAssignment(assignmentId)
+                          }
+                        />
+                      </div>
+                    )}
                   </div>
                 </ListGroup.Item>
               ))}

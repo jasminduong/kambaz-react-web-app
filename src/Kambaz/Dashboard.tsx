@@ -118,7 +118,7 @@ export default function Dashboard() {
 
   const [showAllCourses, setShowAllCourses] = useState(false);
 
-  /*const filteredCourses = showAllCourses
+  const filteredCourses = showAllCourses
     ? courses
     : courses.filter((course: Course) =>
         enrollments.some(
@@ -126,31 +126,7 @@ export default function Dashboard() {
             enrollment.user === currentUser._id &&
             enrollment.course === course._id
         )
-      );*/
-  const filteredCourses = showAllCourses
-    ? courses
-    : courses.filter((course: Course) => {
-        const isEnrolled = enrollments.some(
-          (enrollment: any) =>
-            enrollment.user === currentUser._id &&
-            enrollment.course === course._id
-        );
-
-        // ADD THIS DEBUG FOR COURSE ARTG1290:
-        if (course._id === "ARTG1290") {
-          console.log("=== DEBUG ARTG1290 ENROLLMENT ===");
-          console.log("Course ID:", course._id);
-          console.log("Current user ID:", currentUser._id);
-          console.log("All enrollments:", enrollments);
-          console.log(
-            "User's enrollments:",
-            enrollments.filter((e: { user: any; }) => e.user === currentUser._id)
-          );
-          console.log("Is enrolled in ARTG1290:", isEnrolled);
-        }
-
-        return isEnrolled;
-      });
+      );
 
   const fetchEnrollments = async () => {
     if (currentUser?._id) {
@@ -244,11 +220,6 @@ export default function Dashboard() {
                 enrollment.user === currentUser._id &&
                 enrollment.course === course._id
             );
-            if (course._id === "ARTG1290") {
-              console.log("=== BUTTON DEBUG ARTG1290 ===");
-              console.log("Button shows enrolled:", isEnrolled);
-              console.log("Button text:", isEnrolled ? "Unenroll" : "Enroll");
-            }
 
             return (
               <Col key={course._id} className="wd-dashboard-course">
@@ -256,15 +227,6 @@ export default function Dashboard() {
                   <Link
                     to={`/Kambaz/Courses/${course._id}/Home`}
                     className="wd-dashboard-course-link text-decoration-none text-dark"
-                    onClick={() => {
-                      console.log("=== COURSE CARD CLICKED ===");
-                      console.log("Course ID:", course._id);
-                      console.log("Course data:", course);
-                      console.log(
-                        "Navigating to:",
-                        `/Kambaz/Courses/${course._id}/Home`
-                      );
-                    }}
                   >
                     <Card.Img
                       variant="top"
@@ -292,40 +254,42 @@ export default function Dashboard() {
                               className="fs-3 text-dark"
                             />
                           </Link>
-                          <button
-                            className={`btn btn-sm ${
-                              isEnrolled ? "btn-danger" : "btn-success"
-                            }`}
-                            onClick={async (e) => {
-                              e.preventDefault();
-                              if (isEnrolled) {
-                                await enrollmentsClient.unenrollUser(
-                                  currentUser._id,
-                                  course._id
-                                );
-                                dispatch(
-                                  unenrollUser({
-                                    user: currentUser._id,
-                                    course: course._id,
-                                  })
-                                );
-                              } else {
-                                await enrollmentsClient.enrollUser(
-                                  currentUser._id,
-                                  course._id
-                                );
-                                dispatch(
-                                  enrollUser({
-                                    _id: uuidv4(), // This is only needed for Redux tracking
-                                    user: currentUser._id,
-                                    course: course._id,
-                                  })
-                                );
-                              }
-                            }}
-                          >
-                            {isEnrolled ? "Unenroll" : "Enroll"}
-                          </button>
+                          {showAllCourses && (
+                            <button
+                              className={`btn btn-sm ${
+                                isEnrolled ? "btn-danger" : "btn-success"
+                              }`}
+                              onClick={async (e) => {
+                                e.preventDefault();
+                                if (isEnrolled) {
+                                  await enrollmentsClient.unenrollUser(
+                                    currentUser._id,
+                                    course._id
+                                  );
+                                  dispatch(
+                                    unenrollUser({
+                                      user: currentUser._id,
+                                      course: course._id,
+                                    })
+                                  );
+                                } else {
+                                  await enrollmentsClient.enrollUser(
+                                    currentUser._id,
+                                    course._id
+                                  );
+                                  dispatch(
+                                    enrollUser({
+                                      _id: uuidv4(),
+                                      user: currentUser._id,
+                                      course: course._id,
+                                    })
+                                  );
+                                }
+                              }}
+                            >
+                              {isEnrolled ? "Unenroll" : "Enroll"}
+                            </button>
+                          )}
                         </div>
                         {currentUser.role === "FACULTY" && (
                           <div>
