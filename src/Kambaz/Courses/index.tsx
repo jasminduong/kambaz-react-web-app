@@ -14,14 +14,11 @@ import PeopleTable from "./People/Table";
 import { FaAlignJustify } from "react-icons/fa";
 
 /* Course page layout and route configuration for course tools (home, modules, assignments, assignment editor) */
-export default function Courses({ courses }: { courses: any[] }) { // accept courses from Kambaz (instead of loading from database)
-  {
-    /* gets the cid (dynamic URL parameter) from the current URL */
-  }
+export default function Courses({ courses }: { courses: any[] }) {
+  // accept courses from Kambaz (instead of loading from database)
+  // gets the cid (dynamic URL parameter) from the current URL
   const { cid } = useParams();
-  {
-    /* finds the first course object whose _id matches the cid */
-  }
+  // finds the first course object whose _id matches the cid
   const course = courses.find((course) => course._id === cid);
 
   const { pathname } = useLocation();

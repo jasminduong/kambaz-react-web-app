@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
 
 /* Reducer holds all data points available globally */
 /* Used for when there are multiple screens, each with their own set of state variables that change over time */
@@ -19,14 +18,7 @@ const modulesSlice = createSlice({
 
     // declare reducer mutator functions
     addModule: (state, { payload: module }) => {
-      // new module is in action.payload
-      const newModule: any = {
-        _id: uuidv4(),
-        lessons: [],
-        name: module.name,
-        course: module.course,
-      };
-      state.modules = [...state.modules, newModule] as any; // update modules in state adding new module
+      state.modules = [...state.modules, module] as any;
     },
 
     deleteModule: (state, { payload: moduleId }) => {

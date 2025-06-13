@@ -1,9 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { assignments } from "../../Database";
 
 // create reducer's initial state with default assignments copied from database
-const initialState = {
-  assignments: assignments,
+interface Assignment {
+  _id: string;
+  title: string;
+  description: string;
+  course: string;
+  module: string;
+  points: number;
+  availableDate: string;
+  dueDate: string;
+}
+
+interface AssignmentState {
+  assignments: Assignment[];
+}
+
+const initialState: AssignmentState = {
+  assignments: [],
 };
 
 const assignmentsSlice = createSlice({
@@ -15,7 +29,7 @@ const assignmentsSlice = createSlice({
     },
 
     addAssignment: (state, { payload: assignment }) => {
-      state.assignments = [...state.assignments, assignment];
+      state.assignments.push(assignment);
     },
 
     deleteAssignment: (state, { payload: assignmentId }) => {

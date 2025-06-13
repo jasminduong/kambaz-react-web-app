@@ -1,10 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { courses } from "../../Kambaz/Database";
 
-const initialState = {
-  courses: courses,
+// Define the course interface
+interface Course {
+  _id: string;
+  name: string;
+  number: string;
+  startDate: string;
+  endDate: string;
+  image: string;
+  color: string;
+  description: string;
+}
+
+// Define the state interface
+interface CourseState {
+  courses: Course[];
+  course: Course;
+}
+
+const initialState: CourseState = {
+  courses: [], 
   course: {
-    _id: "0",
+    _id: "",
     name: "New Course",
     number: "New Number",
     startDate: "2023-09-10",
@@ -23,13 +40,13 @@ const courseSlice = createSlice({
       state.course = course;
     },
     addCourse: (state, { payload: course }) => {
-      state.courses = [...state.courses, course];
+      state.courses.push(course); 
     },
     deleteCourse: (state, { payload: courseId }) => {
-      state.courses = state.courses.filter((m: any) => m._id !== courseId);
+      state.courses = state.courses.filter((m) => m._id !== courseId);
     },
     updateCourse: (state, { payload: course }) => {
-      state.courses = state.courses.map((c: any) =>
+      state.courses = state.courses.map((c) =>
         c._id === course._id ? course : c
       );
     },

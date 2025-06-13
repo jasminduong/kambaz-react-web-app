@@ -6,7 +6,6 @@ import { addAssignment } from "../Assignments/reducer";
 import { updateAssignment } from "../Assignments/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import * as coursesClient from "../client";
 import * as assignmentsClient from "./client";
 
 export default function AssignmentEditor() {
@@ -60,21 +59,62 @@ export default function AssignmentEditor() {
   const isNew = !assignmentToEdit;
 
   // handleSave event handler that calls reducer function newAssignment
-  const handleSave = async () => {
+  /*const handleSave = async () => {
     if (isNew) {
-      const newAssignment = await coursesClient.createAssignmentForCourse(
-        cid!,
-        {
-          title,
-          description,
-          course: cid!,
-          module: "ASSIGNMENTS",
-          points,
-          availableDate,
-          dueDate,
-        }
-      );
+      const newAssignment = await assignmentsClient.createAssignment({
+        title,
+        description,
+        course: cid!,
+        module: "ASSIGNMENTS",
+        points,
+        availableDate,
+        dueDate,
+      });
       dispatch(addAssignment(newAssignment));
+    } else {
+      const updatedAssignment = await assignmentsClient.updateAssignment({
+        _id: aid,
+        title,
+        description,
+        course: cid!,
+        module: "ASSIGNMENTS",
+        points,
+        availableDate,
+        dueDate,
+      });
+      dispatch(updateAssignment(updatedAssignment));
+    }
+    navigate(`/Kambaz/Courses/${cid}/Assignments`);
+  };*/
+  // Add debugging to your handleSave function:
+
+  const handleSave = async () => {
+    console.log("=== HANDLE SAVE DEBUG ===");
+    console.log("Is new assignment:", isNew);
+    console.log("Course ID:", cid);
+
+    if (isNew) {
+      const assignmentData = {
+        title,
+        description,
+        course: cid!,
+        module: "ASSIGNMENTS",
+        points,
+        availableDate,
+        dueDate,
+      };
+
+      console.log("Creating assignment with data:", assignmentData);
+
+      try {
+        const newAssignment = await assignmentsClient.createAssignment(
+          assignmentData
+        );
+        console.log("Assignment creation result:", newAssignment);
+        dispatch(addAssignment(newAssignment));
+      } catch (error) {
+        console.error("Error creating assignment:", error);
+      }
     } else {
       const updatedAssignment = await assignmentsClient.updateAssignment({
         _id: aid,

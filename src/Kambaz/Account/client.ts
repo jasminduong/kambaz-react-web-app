@@ -87,7 +87,7 @@ export const findUserById = async (id: string) => {
 
 // deleteUser deletes the given user based on id
 export const deleteUser = async (userId: string) => {
-  const response = await axios.delete( `${USERS_API}/${userId}` );
+  const response = await axios.delete(`${USERS_API}/${userId}`);
   return response.data;
 };
 
@@ -97,6 +97,26 @@ export const createUser = async (user: any) => {
   return response.data;
 };
 
+// findEnrollmentsByUser finds courses for a user
+export const findEnrollmentsByUser = async (userId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${USERS_API}/${userId}/courses`
+  );
+  return response.data;
+};
 
+// enrollIntoCourse enrolls user in course
+export const enrollIntoCourse = async (userId: string, courseId: string) => {
+  const response = await axiosWithCredentials.post(
+    `${USERS_API}/${userId}/courses/${courseId}`
+  );
+  return response.data;
+};
 
-
+// unenrollFromCourse unenrolls user from course
+export const unenrollFromCourse = async (userId: string, courseId: string) => {
+  const response = await axiosWithCredentials.delete(
+    `${USERS_API}/${userId}/courses/${courseId}`
+  );
+  return response.data;
+};

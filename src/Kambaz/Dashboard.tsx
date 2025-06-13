@@ -7,26 +7,31 @@ import { FiTrash } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import {
+  addCourse,
   deleteCourse,
   updateCourse,
   setCourse,
   setCourses,
 } from "./Courses/reducer";
 import { enrollUser, unenrollUser } from "./Enrollments/reducer";
-import * as client from "./Account/client";
 import * as coursesClient from "./Courses/client";
 import * as enrollmentsClient from "./Enrollments/client";
 
 interface Course {
   _id: string;
   name: string;
+  number: string;
+  startDate: string;
+  endDate: string;
+  department: string;
+  credits: number;
   description: string;
   image: string;
   color: string;
 }
 
 const courseTemplate = {
-  _id: "0",
+  _id: uuidv4(),
   name: "New Course",
   number: "New Number",
   startDate: "2023-09-10",
@@ -45,28 +50,43 @@ export default function Dashboard() {
   const enrollments = useSelector(
     (state: any) => state.enrollmentsReducer.enrollments
   );
-  const [showAllCourses, setShowAllCourses] = useState(false);
 
-  const fetchCourses = async (showAll: boolean) => {
-    const allCourses = showAll
-      ? await coursesClient.fetchAllCourses()
-      : await client.findMyCourses();
-  
+  const fetchCourses = async () => {
+    const allCourses = await coursesClient.fetchAllCourses();
     dispatch(setCourses(allCourses));
   };
-  
   useEffect(() => {
-    fetchCourses(showAllCourses);
-  }, [showAllCourses]);
+    fetchCourses();
+  }, []);
 
   const handleAddCourse = async () => {
+    if (!currentUser) {
+      alert("You are not logged in! Please log in first.");
+      return;
+    }
+
+    if (currentUser.role !== "FACULTY") {
+      alert(
+        `You are logged in as ${currentUser.role}, but need to be FACULTY to create courses.`
+      );
+      return;
+    }
     const newCourse: Course = {
-      ...course,
-      image: course.image || "/images/reactjs.png",
-      color: course.color || "#0A64A9",
+      _id: uuidv4(),
+      name: course.name || "New Course",
+      number: course.number || "New Number",
+      startDate: course.startDate || "2023-09-10",
+      endDate: course.endDate || "2023-12-15",
+      department: course.department || "Computer Science",
+      credits: course.credits || 4,
+      description: course.description || "New Description",
+      image: "/images/reactjs.png",
+      color: "#0A64A9",
     };
-    const createdCourse = await client.createCourse(newCourse);
-    await fetchCourses(showAllCourses);
+    const createdCourse = await coursesClient.createCourse(newCourse);
+
+    dispatch(addCourse(createdCourse));
+
     dispatch(
       enrollUser({
         _id: uuidv4(),
@@ -74,6 +94,7 @@ export default function Dashboard() {
         course: createdCourse._id,
       })
     );
+
     dispatch(setCourse(courseTemplate));
     setIsEditing(false);
   };
@@ -95,6 +116,8 @@ export default function Dashboard() {
     );
   };
 
+  const [showAllCourses, setShowAllCourses] = useState(false);
+
   const filteredCourses = showAllCourses
     ? courses
     : courses.filter((course: Course) =>
@@ -107,10 +130,21 @@ export default function Dashboard() {
 
   const fetchEnrollments = async () => {
     if (currentUser?._id) {
-      const enrollments = await enrollmentsClient.findEnrollmentsByUser(
-        currentUser._id
-      );
-      enrollments.forEach((e: any) => dispatch(enrollUser(e)));
+      try {
+        const response = await enrollmentsClient.findEnrollmentsByUser(
+          currentUser._id
+        );
+
+        const enrollments = response.data || response || [];
+
+        if (Array.isArray(enrollments)) {
+          enrollments.forEach((e: any) => dispatch(enrollUser(e)));
+        } else {
+          console.warn("Enrollments response is not an array:", enrollments);
+        }
+      } catch (error) {
+        console.error("Error fetching enrollments:", error);
+      }
     }
   };
   useEffect(() => {
@@ -193,6 +227,15 @@ export default function Dashboard() {
                   <Link
                     to={`/Kambaz/Courses/${course._id}/Home`}
                     className="wd-dashboard-course-link text-decoration-none text-dark"
+                    onClick={() => {
+                      console.log("=== COURSE CARD CLICKED ===");
+                      console.log("Course ID:", course._id);
+                      console.log("Course data:", course);
+                      console.log(
+                        "Navigating to:",
+                        `/Kambaz/Courses/${course._id}/Home`
+                      );
+                    }}
                   >
                     <Card.Img
                       variant="top"
@@ -237,7 +280,6 @@ export default function Dashboard() {
                                     course: course._id,
                                   })
                                 );
-                                fetchEnrollments();
                               } else {
                                 await enrollmentsClient.enrollUser(
                                   currentUser._id,
@@ -245,7 +287,7 @@ export default function Dashboard() {
                                 );
                                 dispatch(
                                   enrollUser({
-                                    _id: uuidv4(),
+                                    _id: uuidv4(), // This is only needed for Redux tracking
                                     user: currentUser._id,
                                     course: course._id,
                                   })
