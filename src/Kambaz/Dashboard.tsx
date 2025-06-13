@@ -118,7 +118,7 @@ export default function Dashboard() {
 
   const [showAllCourses, setShowAllCourses] = useState(false);
 
-  const filteredCourses = showAllCourses
+  /*const filteredCourses = showAllCourses
     ? courses
     : courses.filter((course: Course) =>
         enrollments.some(
@@ -126,7 +126,31 @@ export default function Dashboard() {
             enrollment.user === currentUser._id &&
             enrollment.course === course._id
         )
-      );
+      );*/
+  const filteredCourses = showAllCourses
+    ? courses
+    : courses.filter((course: Course) => {
+        const isEnrolled = enrollments.some(
+          (enrollment: any) =>
+            enrollment.user === currentUser._id &&
+            enrollment.course === course._id
+        );
+
+        // ADD THIS DEBUG FOR COURSE ARTG1290:
+        if (course._id === "ARTG1290") {
+          console.log("=== DEBUG ARTG1290 ENROLLMENT ===");
+          console.log("Course ID:", course._id);
+          console.log("Current user ID:", currentUser._id);
+          console.log("All enrollments:", enrollments);
+          console.log(
+            "User's enrollments:",
+            enrollments.filter((e: { user: any; }) => e.user === currentUser._id)
+          );
+          console.log("Is enrolled in ARTG1290:", isEnrolled);
+        }
+
+        return isEnrolled;
+      });
 
   const fetchEnrollments = async () => {
     if (currentUser?._id) {
@@ -159,7 +183,7 @@ export default function Dashboard() {
           className="btn btn-primary btn-sm"
           onClick={() => setShowAllCourses(!showAllCourses)}
         >
-          {showAllCourses ? "Show Enrolled Only" : "Show All Courses"}
+          {showAllCourses ? "My Courses" : "All Courses"}
         </button>
       </div>
       <hr />
@@ -220,6 +244,11 @@ export default function Dashboard() {
                 enrollment.user === currentUser._id &&
                 enrollment.course === course._id
             );
+            if (course._id === "ARTG1290") {
+              console.log("=== BUTTON DEBUG ARTG1290 ===");
+              console.log("Button shows enrolled:", isEnrolled);
+              console.log("Button text:", isEnrolled ? "Unenroll" : "Enroll");
+            }
 
             return (
               <Col key={course._id} className="wd-dashboard-course">
