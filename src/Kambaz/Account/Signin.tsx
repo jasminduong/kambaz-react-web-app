@@ -13,27 +13,10 @@ export default function Signin() {
   // clicking the Sign in button posts the credentials to the server using the client.signin function
   // when the server responds successfully, the currently logged in user is stored in the user reducer and navigate to the Profile screen
   const signin = async () => {
-    console.log("=== FRONTEND SIGNIN DEBUG ===");
-    console.log("Credentials:", credentials);
-
-    try {
-      console.log("Calling client.signin...");
-      const user = await client.signin(credentials);
-
-      console.log("Signin response:", user);
-
-      if (!user) {
-        console.log("No user returned");
-        return;
-      }
-
-      console.log("Signin successful, dispatching user:", user);
-      dispatch(setCurrentUser(user));
-      navigate("/Kambaz/Dashboard");
-    } catch (error) {
-      console.error("=== SIGNIN ERROR ===");
-      console.error("Error details:", error);
-    }
+    const user = await client.signin(credentials); // fetches signin credentials from client
+    if (!user) return;
+    dispatch(setCurrentUser(user));
+    navigate("/Kambaz/Dashboard");
   };
 
   return (

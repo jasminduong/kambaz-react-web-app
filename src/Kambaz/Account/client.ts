@@ -9,23 +9,11 @@ const axiosWithCredentials = axios.create({ withCredentials: true }); // creates
 // signin posts a credentials object containing the username and password expected by the server
 // if the credentials are found, the response should contain the logged in user
 export const signin = async (credentials: any) => {
-  console.log("=== CLIENT SIGNIN DEBUG ===");
-  console.log("Credentials:", credentials);
-  console.log("REMOTE_SERVER:", REMOTE_SERVER);
-  console.log("USERS_API:", USERS_API);
-  console.log("Full URL:", `${USERS_API}/signin`);
-
-  try {
-    const response = await axiosWithCredentials.post(
-      `${USERS_API}/signin`,
-      credentials
-    );
-    console.log("Signin response:", response);
-    return response.data;
-  } catch (error) {
-    console.error("Client signin error:", error);
-    throw error; // Re-throw so the component can handle it
-  }
+  const response = await axiosWithCredentials.post(
+    `${USERS_API}/signin`,
+    credentials
+  ); // fetches signin credentials from server
+  return response.data;
 };
 
 // signup posts a user object
