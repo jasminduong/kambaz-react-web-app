@@ -13,7 +13,11 @@ import {
   setCourse,
   setCourses,
 } from "./Courses/reducer";
-import { enrollUser, unenrollUser } from "./Enrollments/reducer";
+import {
+  enrollUser,
+  setEnrollments,
+  unenrollUser,
+} from "./Enrollments/reducer";
 import * as coursesClient from "./Courses/client";
 import * as enrollmentsClient from "./Enrollments/client";
 
@@ -31,11 +35,12 @@ interface Course {
 }
 
 const courseTemplate = {
-  _id: uuidv4(),
   name: "New Course",
   number: "New Number",
   startDate: "2023-09-10",
   endDate: "2023-12-15",
+  department: "Computer Science",
+  credits: 4,
   image: "/images/reactjs.png",
   color: "#0A64A9",
   description: "New Description",
@@ -50,6 +55,38 @@ export default function Dashboard() {
   const enrollments = useSelector(
     (state: any) => state.enrollmentsReducer.enrollments
   );
+
+  const [showAllCourses, setShowAllCourses] = useState(false);
+
+  const filteredCourses = showAllCourses
+    ? courses
+    : courses.filter((course: Course) =>
+        enrollments.some(
+          (enrollment: any) =>
+            enrollment.user === currentUser._id &&
+            enrollment.course === course._id
+        )
+      );
+
+  const fetchEnrollments = async () => {
+    if (currentUser?._id) {
+      try {
+        const response = await enrollmentsClient.findEnrollmentsByUser(
+          currentUser._id
+        );
+        const enrollments = response.data || response || [];
+
+        if (Array.isArray(enrollments)) {
+          dispatch(setEnrollments(enrollments));
+        }
+      } catch (error) {
+        console.error("Error fetching enrollments:", error);
+      }
+    }
+  };
+  useEffect(() => {
+    fetchEnrollments();
+  }, []);
 
   const fetchCourses = async () => {
     const allCourses = await coursesClient.fetchAllCourses();
@@ -71,32 +108,53 @@ export default function Dashboard() {
       );
       return;
     }
-    const newCourse: Course = {
-      _id: uuidv4(),
-      name: course.name || "New Course",
-      number: course.number || "New Number",
-      startDate: course.startDate || "2023-09-10",
-      endDate: course.endDate || "2023-12-15",
-      department: course.department || "Computer Science",
-      credits: course.credits || 4,
-      description: course.description || "New Description",
-      image: "/images/reactjs.png",
-      color: "#0A64A9",
-    };
-    const createdCourse = await coursesClient.createCourse(newCourse);
+    try {
+      const newCourse: Omit<Course, "_id"> = {
+        name: course.name || "New Course",
+        number: course.number || "New Number",
+        startDate: course.startDate || "2023-09-10",
+        endDate: course.endDate || "2023-12-15",
+        department: course.department || "Computer Science",
+        credits: course.credits || 4,
+        description: course.description || "New Description",
+        image: "/images/reactjs.png",
+        color: "#0A64A9",
+      };
 
-    dispatch(addCourse(createdCourse));
+      // creates the course
+      const createdCourse = await coursesClient.createCourse(newCourse);
 
-    dispatch(
-      enrollUser({
-        _id: uuidv4(),
-        user: currentUser._id,
-        course: createdCourse._id,
-      })
-    );
+      // adds to Redux store
+      dispatch(addCourse(createdCourse));
 
-    dispatch(setCourse(courseTemplate));
-    setIsEditing(false);
+      // enrolls the faculty member in the course
+      try {
+        await enrollmentsClient.enrollUser(currentUser._id, createdCourse._id);
+
+        // add enrollment to Redux store
+        dispatch(
+          enrollUser({
+            _id: uuidv4(),
+            user: currentUser._id,
+            course: createdCourse._id,
+          })
+        );
+      } catch (enrollmentError) {
+        console.error("Error enrolling user:", enrollmentError);
+        // course was created but enrollment failed - you might want to handle this
+      }
+
+      // reset form
+      dispatch(setCourse(courseTemplate));
+      setIsEditing(false);
+
+      // refresh data to ensure consistency
+      await fetchCourses();
+      await fetchEnrollments();
+    } catch (error) {
+      console.error("Error creating course:", error);
+      alert("Failed to create course. Please try again.");
+    }
   };
 
   const handleUpdateCourse = async () => {
@@ -115,41 +173,6 @@ export default function Dashboard() {
       })
     );
   };
-
-  const [showAllCourses, setShowAllCourses] = useState(false);
-
-  const filteredCourses = showAllCourses
-    ? courses
-    : courses.filter((course: Course) =>
-        enrollments.some(
-          (enrollment: any) =>
-            enrollment.user === currentUser._id &&
-            enrollment.course === course._id
-        )
-      );
-
-  const fetchEnrollments = async () => {
-    if (currentUser?._id) {
-      try {
-        const response = await enrollmentsClient.findEnrollmentsByUser(
-          currentUser._id
-        );
-
-        const enrollments = response.data || response || [];
-
-        if (Array.isArray(enrollments)) {
-          enrollments.forEach((e: any) => dispatch(enrollUser(e)));
-        } else {
-          console.warn("Enrollments response is not an array:", enrollments);
-        }
-      } catch (error) {
-        console.error("Error fetching enrollments:", error);
-      }
-    }
-  };
-  useEffect(() => {
-    fetchEnrollments();
-  }, []);
 
   return (
     <div id="wd-dashboard">
